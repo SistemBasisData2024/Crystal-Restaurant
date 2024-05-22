@@ -1,10 +1,10 @@
+import { flexCenterCol, fullScreen } from './tailwinds/templates'
+
 function App() {
   return (
-    <>
-      <div className="bg-red-300">
-        Hello World
-      </div>
-    </>
+    <div className={fullScreen() + flexCenterCol()}>
+      <h1>App</h1>
+    </div>
   )
 }
 

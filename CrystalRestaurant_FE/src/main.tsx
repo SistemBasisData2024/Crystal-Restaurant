@@ -3,24 +3,26 @@ import ReactDOM from 'react-dom/client'
 import { createBrowserRouter, RouterProvider } from "react-router-dom"
 import './index.css'
 
-import Navbar from './component/Navbar.tsx'
+import Navbar from './components/Navbar.tsx'
+
 import App from './App.tsx'
-import LoginPage from './pages/LoginPage.tsx'
+import ColorPalette from './pages/ColorPalette.tsx'
+import ErrorPage from './pages/ErrorPage.tsx'
 
 const router = createBrowserRouter([
   {
     children: [
       {
-        path: "/home",
+        path: "/",
         element: <App />,
       },
       {
-        path: "/",
-        element: <LoginPage />,
+        path: "/color-palette",
+        element: <ColorPalette />,
       },
       {
         path: "*",
-        element: <h1>404</h1>,
+        element: <ErrorPage />,
       }
     ],
   },
