@@ -1,4 +1,4 @@
-import { flexCenterCol, fullScreen } from './tailwinds/templates'
+import { flexCenterCol, fullScreen } from "./tailwinds/templates"
 
 function App() {
   return (

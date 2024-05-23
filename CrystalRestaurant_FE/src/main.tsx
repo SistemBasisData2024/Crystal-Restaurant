@@ -1,13 +1,13 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
+import React from "react"
+import ReactDOM from "react-dom/client"
 import { createBrowserRouter, RouterProvider } from "react-router-dom"
-import './index.css'
+import "./index.css"
 
-import Navbar from './components/Navbar.tsx'
+import Navbar from "./components/Navbar.tsx"
 
-import App from './App.tsx'
-import ColorPalette from './pages/ColorPalette.tsx'
-import ErrorPage from './pages/ErrorPage.tsx'
+import App from "./App.tsx"
+import ColorPalette from "./pages/ColorPalette.tsx"
+import ErrorPage from "./pages/ErrorPage.tsx"
 
 const router = createBrowserRouter([
   {
@@ -23,14 +23,14 @@ const router = createBrowserRouter([
       {
         path: "*",
         element: <ErrorPage />,
-      }
+      },
     ],
   },
 ])
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
+ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <Navbar />
     <RouterProvider router={router} />
-  </React.StrictMode>,
+  </React.StrictMode>
 )
