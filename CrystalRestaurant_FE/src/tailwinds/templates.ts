@@ -7,6 +7,9 @@ export function flexCenterRow() {
 }
 
 export function fullScreen() {
-  return ` h-screen w-screen `;
+  return ` min-h-screen w-screen `;
 }
 
+export function bgGradient(direction:string, color:string) {
+  return ` bg-gradient-to-${direction} from-${color}-100 to-${color}-200 `
+}

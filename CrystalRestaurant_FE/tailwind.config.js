@@ -36,6 +36,9 @@ export default {
         newwhite: "#F0F0F0",
         newblack: "#101010",
       },
+      transitionTimingFunction: {
+        'exponential': 'cubic-bezier(0.175, 0.885, 0.32, 1.275)',
+      }
     },
   },
   plugins: [],
