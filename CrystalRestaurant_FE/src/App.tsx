@@ -4,7 +4,7 @@ import FoodCardsGroup from "./components/FoodCardsGroup"
 function App() {
   return (
     <div className={fullScreen() + bgGradient('t', 'bgdull') + "flex flex-col items-center"}>
-      <section className="flex flex-col  overflow-y-visible w-screen md:w-[800px] h-fit py-8">
+      <section className="flex flex-col overflow-y-visible w-screen md:w-[800px] lg:w-[1200px] h-fit py-8">
         <FoodCardsGroup />
       </section>
     </div>

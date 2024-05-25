@@ -3,7 +3,8 @@ import FoodCards from "./FoodCards"
 export default function FoodCardsGroup() {
   const data = [
     {
-      title: "Topaz",
+      title:
+        "Topaz Custom Cake yCake yang dibuat pake red velvet dan toppingCake yang dibuat pake red velvet dan toppingang dibuat pake red velvet dan topping buah segar",
       price: 100000,
       image: "https://picsum.photos/seed/picsum/200/300",
       description:
@@ -47,7 +48,7 @@ export default function FoodCardsGroup() {
   ]
 
   return (
-    <div className='flex gap-4 justify-center flex-wrap'>
+    <div className='flex gap-2 md:gap-4 justify-center flex-wrap'>
       {data.map((item, index) => (
         <FoodCards
           mykey={index}

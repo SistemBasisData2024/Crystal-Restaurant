@@ -29,16 +29,16 @@ export default function FoodCards(props: {
     const [isLoaded, setIsLoaded] = useState(false)
 
     return (
-      <section className='h-screen w-screen z-10 absolute top-0 left-0 text-[1rem]'>
+      <section className='absolute left-0 top-0 z-10 h-screen w-screen text-[1rem]'>
         <div
-          className={`fixed h-full w-full flex flex-col items-center justify-end rounded-[0.5em] bg-bgdull-200 bg-opacity-50 p-[0.25em] pb-0 text-newwhite backdrop-blur-lg ${isLoaded ? "opacity-100" : "opacity-0"} transition-opacity duration-200 ease-out`}
+          className={`fixed flex h-full w-full flex-col items-center justify-end rounded-[0.5em] bg-bgdull-200 bg-opacity-50 p-[0.25em] pb-0 text-newwhite backdrop-blur-lg ${isLoaded ? "opacity-100" : "opacity-0"} transition-opacity duration-200 ease-out`}
           onLoad={() => setIsLoaded(true)}
         >
           <div
             className={`h-fit w-full rounded-t-[2em] border-2 border-b-0 border-newwhite bg-bgdull-100 p-[2em] md:w-[600px] md:p-[1em] 
         ${isLoaded ? "opacity-100" : "opacity-0"} transition-opacity duration-300 ease-out`}
           >
-            <div className='mb-[1.25em] flex items-center justify-between'>
+            <div className='mb-[1.25em] flex items-start justify-between'>
               <h5 className='text-[1.25em] font-bold tracking-tight text-newwhite'>
                 {props.title}
               </h5>
@@ -77,30 +77,32 @@ export default function FoodCards(props: {
   return (
     <>
       <section
-        className={`w-[20em] overflow-auto rounded-[0.5em] border border-bgdull-100 bg-bgdull-200 text-[0.5rem] shadow md:text-[1rem] 
+        className={`w-[20em] overflow-auto rounded-[0.5em] border-2 border-bgprim-100 bg-bgsecon-200 text-[0.5rem] shadow md:text-[1rem]
         `}
-        onMouseDown={() => setClicked(false)}
         id={`fc-${props.mykey}`}
       >
-        <img
-          className='h-[12em] w-full rounded-t-[0.5em] object-cover object-center'
-          src={props.image}
-          alt={props.title}
-        />
-        <div className='p-[1.25em]'>
-          <h5 className='mb-[0.5em] line-clamp-2 min-h-[3.125em] text-[1.25em] font-bold tracking-tight text-newwhite'>
-            {props.title}
-          </h5>
-          <p className='mb-[0.75em] text-[0.75em] font-normal text-newwhite'>
-            {priceToIDR(props.price)}
-          </p>
-          <div
-            className='inline-flex items-center rounded-[0.5em] border-[0.125em] border-prim-100 bg-newwhite 
-          px-[0.5em] py-[0.5em] text-center text-[0.875em] font-medium text-prim-100 transition-colors duration-200 
-          ease-out hover:bg-prim-100 hover:text-newwhite focus:outline-none focus:ring-2 focus:ring-prim-400'
-          >
-            Add to cart
+        <div className=' cursor-pointer' onMouseDown={() => setClicked(false)}>
+          <img
+            className='h-[12em] w-full rounded-t-[0.5em] object-cover object-center'
+            src={props.image}
+            alt={props.title}
+          />
+          <div className='p-[1.25em]'>
+            <h5 className='mb-[0.5em] line-clamp-2 min-h-[3.125em] text-[2em] md:text-[1.25em] font-bold tracking-tight text-newwhite'>
+              {props.title}
+            </h5>
+            <p className='mb-[0.75em] text-[1.25em] md:text-[0.75em] font-normal text-newwhite'>
+              {priceToIDR(props.price)}
+            </p>
           </div>
+        </div>
+        <div
+          className='text-[1.25em] md:text-[1em] mx-[1.25em] mb-[1em] -mt-[1em] inline-flex items-center rounded-[0.5em] 
+              border-[0.125em] border-prim-100 bg-newwhite p-[0.5em] px-[0.5em] pb-[0.5em] text-center
+              font-medium text-prim-100 transition-colors duration-200 ease-out hover:bg-prim-100
+              hover:text-newwhite focus:outline-none focus:ring-2 focus:ring-prim-400'
+        >
+          Add to cart
         </div>
 
         {!clicked && (
