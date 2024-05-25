@@ -1,34 +1,40 @@
-// import axios from "axios";
-// import qs from "qs";
+import axios from "axios";
 
-// export const login = async (username, password) => {
-//   try {
-//     const response = await axios.post(
-//       `${import.meta.env.VITE_BACKEND_URL}/user/login`,
-//       qs.stringify({
-//         username,
-//         password
-//       })
-//     );
-//     return response.data;
-//   } catch (error) {
-//     // console.log(error.response.data);
-//     return error.response.data;
-//   }
-// }
+//formData = req.body
 
-// export const register = async (username, password) => {
-//   try {
-//     const response = await axios.post(
-//       `${import.meta.env.VITE_BACKEND_URL}/user/register`,
-//       qs.stringify({
-//         username,
-//         password
-//       })
-//     );
-//     return response.data;
-//   } catch (error) {
-//     // console.log(error);
-//     return error.response.data;
-//   }
-// }
+const baseApiResponse = (data, isSuccess) => {
+    return {
+        success: isSuccess,
+        data: data || null,
+    };
+};
+
+export const userLogin = async (formData) => {
+    try{
+        const response = await axios.post(
+            `${import.meta.env.VITE_API_URL}/user/login`,
+            formData
+        );
+        console.log("RESPONSE FROM BACKEND");
+        console.log(response.data);
+        return baseApiResponse(response.data, true);
+    } catch (error) {
+        console.error(error);
+        return baseApiResponse(null, false);
+    }
+}
+
+export const userSignUp = async (formData) => {
+    try {
+        const response = await axios.post(
+            `${import.meta.env.VITE_API_URL}/user/signup`,
+            formData
+        );
+        console.log("RESPONSE FROM BACKEND");
+        console.log(response.data);
+        return baseApiResponse(response.data, true);
+    } catch (error) {
+        console.error(error);
+        return baseApiResponse(null, false);
+    }
+};

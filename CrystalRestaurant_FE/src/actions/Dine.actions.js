@@ -9,7 +9,7 @@ const baseApiResponse = (data, isSuccess) => {
     };
 };
 
-export const userSignUp = async () => {
+export const dineIn = async () => {
     try {
         const response = await axios.post(
             `${import.meta.env.VITE_API_URL}/dine/create`
