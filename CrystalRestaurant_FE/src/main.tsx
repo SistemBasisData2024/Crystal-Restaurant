@@ -5,20 +5,25 @@ import "./index.css"
 
 import Navbar from "./components/Navbar.tsx"
 
-import App from "./App.tsx"
+import MenuPage from "./pages/MenuPage.tsx"
 import ColorPalette from "./pages/ColorPalette.tsx"
 import ErrorPage from "./pages/ErrorPage.tsx"
+import LoginPage from "./pages/LoginPage.tsx"
 
 const router = createBrowserRouter([
   {
     children: [
       {
         path: "/",
-        element: <App />,
+        element: <MenuPage />,
       },
       {
         path: "/color-palette",
         element: <ColorPalette />,
+      },
+      {
+        path: "/login",
+        element: <LoginPage />,
       },
       {
         path: "*",

@@ -1,11 +1,15 @@
 import { useState } from "react"
+import { addMenu } from "../actions/Menu.action"
 
 export default function FoodCards(props: {
+  id: string
   title: string
   description: string
   image: string
   price: number
   mykey: number
+  orderState: any
+  setOrderState: any
 }) {
   const [clicked, setClicked] = useState(true)
 
@@ -65,7 +69,7 @@ export default function FoodCards(props: {
             <p className='line-clamp-3 text-[0.875em] font-normal text-newwhite'>
               {props.description}
             </p>
-            <div className='mt-[2em] inline-flex items-center rounded-[0.5em] border-[0.125em] border-prim-100 bg-newwhite px-[0.5em] py-[0.5em] text-center text-[0.875em] font-medium text-prim-100 transition-colors duration-200 ease-out hover:bg-prim-100 hover:text-newwhite focus:outline-none focus:ring-2 focus:ring-prim-400'>
+            <div className='mt-[2em] inline-flex items-center rounded-[0.5em] border-[0.125em] border-prim-100 bg-newwhite px-[0.5em] py-[0.5em] text-center text-[0.875em] font-medium text-prim-100 transition-colors duration-200 ease-out hover:bg-prim-100 hover:text-newwhite focus:outline-none focus:ring-2 focus:ring-prim-400 cursor-pointer'>
               Add to cart
             </div>
           </div>
@@ -100,7 +104,18 @@ export default function FoodCards(props: {
           className='text-[1.25em] md:text-[1em] mx-[1.25em] mb-[1em] -mt-[1em] inline-flex items-center rounded-[0.5em] 
               border-[0.125em] border-prim-100 bg-newwhite p-[0.5em] px-[0.5em] pb-[0.5em] text-center
               font-medium text-prim-100 transition-colors duration-200 ease-out hover:bg-prim-100
-              hover:text-newwhite focus:outline-none focus:ring-2 focus:ring-prim-400'
+              hover:text-newwhite focus:outline-none focus:ring-2 focus:ring-prim-400 cursor-pointer'
+          onClick={() => {
+            addMenu(
+              props.title,
+              1,
+              props.orderState,
+              props.setOrderState
+            );
+
+            console.log(props.title);
+            }
+          }
         >
           Add to cart
         </div>
