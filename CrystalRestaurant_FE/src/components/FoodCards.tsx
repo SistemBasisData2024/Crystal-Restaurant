@@ -1,7 +1,9 @@
-import { useContext, useState } from "react"
+import { useState } from "react"
 import { addMenu } from "../actions/Menu.action"
-import menuContext from "../context/menuContext"
 import Description from "./CardDetails"
+
+// import { useAtom } from "jotai"
+// import { orderAtom } from "../main"
 
 export default function FoodCards(props: {
   id: number
@@ -10,6 +12,8 @@ export default function FoodCards(props: {
   image: string
   price: number
   mykey: number
+  orderState: any
+  setOrderState: any
 }) {
   const [clicked, setClicked] = useState(true)
 
@@ -20,8 +24,6 @@ export default function FoodCards(props: {
     }).format(price)
     return converted
   }
-
-  const [orderState, setOrderState] = useContext(menuContext)
 
   return (
     <>
@@ -45,7 +47,7 @@ export default function FoodCards(props: {
             </p>
           </div>
         </div>
-        <div
+        <button
           className='mx-[1.25em] -mt-[1em] mb-[1em] inline-flex cursor-pointer items-center rounded-[0.5em] border-[0.125em] 
               border-prim-100 bg-newwhite p-[0.5em] px-[0.5em] pb-[0.5em] text-center text-[1.25em]
               font-medium text-prim-100 transition-colors duration-200 ease-out hover:bg-prim-100
@@ -56,15 +58,15 @@ export default function FoodCards(props: {
               props.title,
               1,
               props.price,
-              orderState,
-              setOrderState
+              props.orderState,
+              props.setOrderState
             )
 
             console.log(props.title)
           }}
         >
           Add to cart
-        </div>
+        </button>
 
         {!clicked && (
           <Description

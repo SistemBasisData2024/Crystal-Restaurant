@@ -3,62 +3,72 @@ import ReactDOM from "react-dom/client"
 import { createBrowserRouter, RouterProvider } from "react-router-dom"
 import "./index.css"
 
-import menuContext from "./context/menuContext.ts"
-
 import Navbar from "./components/Navbar.tsx"
 
 import MenuPage from "./pages/MenuPage.tsx"
 import ColorPalette from "./pages/ColorPalette.tsx"
 import ErrorPage from "./pages/ErrorPage.tsx"
 import LoginPage from "./pages/LoginPage.tsx"
-import DetailsPage from "./pages/DetailsPage.tsx" 
+import DetailsPage from "./pages/DetailsPage.tsx"
 
-interface Order {
-  id: number
-  title: string
-  price: number
-  quantity: number
-}
+// import { atom, createStore, Provider } from "jotai"
 
-const router = createBrowserRouter([
-  {
-    children: [
-      {
-        path: "/",
-        element: <MenuPage />,
-      },
-      {
-        path: "/color-palette",
-        element: <ColorPalette />,
-      },
-      {
-        path: "/login",
-        element: <LoginPage />,
-      },
-      {
-        path: "/details",
-        element: <DetailsPage />,
-      },
-      {
-        path: "*",
-        element: <ErrorPage />,
-      },
-    ],
-  },
-])
 
+// export const orderAtom = atom<Order[]>([])
+
+
+
+// const store = createStore()
 
 function App() {
-  const [order, setOrder] = useState<Order[]>([])
+  interface Order {
+    id: number
+    title: string
+    price: number
+    quantity: number
+  }
 
+  const [orderState, setOrderState] = useState<Order[]>([])
+
+  const router = createBrowserRouter([
+    {
+      children: [
+        {
+          path: "/",
+          element: (
+            <MenuPage orderState={orderState} setOrderState={setOrderState} />
+          ),
+        },
+        {
+          path: "/color-palette",
+          element: <ColorPalette />,
+        },
+        {
+          path: "/login",
+          element: <LoginPage  />,
+        },
+        {
+          path: "/details",
+          element: <DetailsPage orderState={orderState} setOrderState={setOrderState} />,
+        },
+        {
+          path: "*",
+          element: <ErrorPage />,
+        },
+      ],
+    },
+  ])
+  
   return (
     <React.StrictMode>
-      <menuContext.Provider value={[order, setOrder]}>
-        <Navbar />
-        <RouterProvider router={router} />
-      </menuContext.Provider>
+      <Navbar />
+      <RouterProvider router={router} />
     </React.StrictMode>
   )
 }
 
-ReactDOM.createRoot(document.getElementById("root")!).render(<App />)
+ReactDOM.createRoot(document.getElementById("root")!).render(
+  // <Provider store={store}>
+  <App />
+  // </Provider>
+)

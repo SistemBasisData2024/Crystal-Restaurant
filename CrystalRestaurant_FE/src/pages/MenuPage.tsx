@@ -1,11 +1,18 @@
 import { fullScreen, bgGradient } from "../tailwinds/templates"
 import FoodCardsGroup from "../components/FoodCardsGroup"
 
-function Menu() {
+function Menu(props: {orderState: any, setOrderState:any}) {
   return (
-    <div className={fullScreen() + bgGradient('t', 'bgdull') + "flex flex-col items-center"}>
-      <section className="flex flex-col overflow-y-visible w-screen md:w-[800px] lg:w-[1200px] h-fit py-8">
-        <FoodCardsGroup />
+    <div
+      className={
+        fullScreen() + bgGradient("t", "bgdull") + "flex flex-col items-center"
+      }
+    >
+      <section className='flex h-fit w-screen flex-col overflow-y-visible py-8 md:w-[800px] lg:w-[1200px]'>
+        <FoodCardsGroup
+          orderState={props.orderState}
+          setOrderState={props.setOrderState}
+        />
       </section>
     </div>
   )

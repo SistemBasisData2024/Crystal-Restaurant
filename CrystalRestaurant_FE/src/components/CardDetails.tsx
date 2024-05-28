@@ -19,7 +19,7 @@ export default function Description(props: {
         onLoad={() => setIsLoaded(true)}
       >
         <div
-          className={`h-fit w-full rounded-t-[2em] border-2 border-b-0 border-newwhite bg-bgdull-100 p-[2em] md:w-[600px] md:p-[1em] 
+          className={`h-fit w-full rounded-t-[2em] border-2 border-b-0 border-newwhite bg-bgdull-100 p-[2em] md:w-[600px] md:p-[2em] 
         ${isLoaded ? "opacity-100" : "opacity-0"} transition-opacity duration-300 ease-out`}
         >
           <div className='mb-[1.25em] flex items-start justify-between'>
@@ -38,11 +38,11 @@ export default function Description(props: {
               X
             </h1>
           </div>
-          <p className='mb-[2em] text-[0.875em] font-normal text-newwhite'>
+          <p className='mb-[1em] text-[0.875em] font-normal text-newwhite'>
             {props.priceToIDR(props.price)}
           </p>
           <img
-            className='h-[12em] w-full rounded-[0.5em] object-cover object-center'
+            className='h-[12em] w-full rounded-[0.5em] object-cover object-center mb-[2em]'
             src={props.image}
             alt={props.title}
           />
