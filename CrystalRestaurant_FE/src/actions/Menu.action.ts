@@ -1,14 +1,24 @@
 // import axios from 'axios'; // (semestara belum api call)
 
 export const addMenu = (
-  menuId: string, 
+  menuId: number, 
+  menuTitle: string,
   count: number,
+  price: number,
   orderState: any,
   setOrderState: any
 ) => {
-  const newOrderState = { ...orderState }
-  newOrderState[menuId] = count
+  const newOrderState = [...orderState]
+
+  // append new menu to order state
+  newOrderState.push({
+    id: menuId,
+    title: menuTitle,
+    quantity: count,
+    price: price
+  })
   setOrderState(newOrderState)
+
   console.table(newOrderState) // Debugging
 }
 

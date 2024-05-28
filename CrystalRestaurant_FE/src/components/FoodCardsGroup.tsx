@@ -1,12 +1,12 @@
 import FoodCards from "./FoodCards"
 import Topaz from "../assets/maxresdefault.jpg"
 
-export default function FoodCardsGroup(props: { orderState: any, setOrderState: any }) {
+export default function FoodCardsGroup() {
   const data = [
     {
       id: 1,
       title:
-        "Topaz Custom Cake yCake yang dibuat pake red velvet dan toppingCake yang dibuat pake red velvet dan toppingang dibuat pake red velvet dan topping buah segar",
+        "tes 1",
       price: 100000,
       image: Topaz,
       description:
@@ -250,15 +250,13 @@ export default function FoodCardsGroup(props: { orderState: any, setOrderState: 
     <div className='flex gap-2 md:gap-4 justify-center flex-wrap'>
       {data.map((item, index) => (
         <FoodCards
-          id={item.id.toString()}
+          id={item.id}
           mykey={index}
           key={index}
           title={item.title}
           price={item.price}
           image={item.image}
           description={item.description}
-          orderState={props.orderState}
-          setOrderState={props.setOrderState}
         />
       ))}
     </div>

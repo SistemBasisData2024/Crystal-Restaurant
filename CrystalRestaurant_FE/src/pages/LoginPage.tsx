@@ -1,23 +1,19 @@
-import logo from '../assets/logo.svg'
+import logo from "../assets/logo.svg"
 
 export default function LoginPage() {
   return (
-    <section className='bg-bgdull-200 absolute top-0 left-0 -z-10 w-screen h-screen'>
-      <div className='mx-auto flex flex-col items-center justify-center px-6 py-8 h-screen lg:py-0'>
+    <section className='absolute left-0 top-0 -z-10 h-screen w-screen bg-bgdull-200'>
+      <div className='mx-auto flex h-screen flex-col items-center justify-center px-6 py-8 lg:py-0'>
         <a
           href='#'
-          className='mb-6 hidden md:flex items-center text-2xl font-semibold text-newwhite'
+          className='mb-6 hidden items-center text-2xl font-semibold text-newwhite md:flex'
         >
-          <img
-            className='mr-2 h-8 w-8'
-            src={logo}
-            alt='logo'
-          />
+          <img className='mr-2 h-8 w-8' src={logo} alt='logo' />
           Crystal Restaurant
         </a>
-        <div className='w-full rounded-2xl border-2 border-secon-500 bg-bgsecon-100 shadow sm:max-w-md md:mt-0 xl:p-0'>
+        <div className='w-full rounded-2xl border-2 border-secon-500 bg-bgsecon-100 duration-300 hover:border-prim-100 hover:shadow-xl hover:shadow-prim-500 sm:max-w-md md:mt-0 xl:p-0'>
           <div className='space-y-8 p-6 sm:p-8'>
-            <h1 className='text-xl font-bold leading-tight tracking-tight text-center text-newwhite md:text-2xl'>
+            <h1 className='text-center text-xl font-bold leading-tight tracking-tight text-newwhite md:text-2xl'>
               Sign in to your account
             </h1>
             <form className='space-y-4' action='#'>

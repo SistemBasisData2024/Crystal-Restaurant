@@ -49,7 +49,7 @@ function Navbar() {
           <ul className='mt-4 flex flex-col rounded-lg border border-bgdull-100 p-4 font-medium md:mt-0 md:flex-row md:space-x-8 md:border-0 md:p-0 rtl:space-x-reverse'>
             <li>
               <a
-                href='#'
+                href='/'
                 className='block rounded bg-prim-300 px-3 py-2 text-white md:bg-transparent md:p-0 md:text-prim-100'
                 aria-current='page'
               >
@@ -66,7 +66,7 @@ function Navbar() {
             </li>
             <li>
               <a
-                href='#'
+                href='/details'
                 className='block rounded px-3 py-2 text-white hover:bg-bgdull-100 hover:text-white md:border-0 md:p-0 md:hover:bg-transparent md:hover:text-prim-100'
               >
                 Details
