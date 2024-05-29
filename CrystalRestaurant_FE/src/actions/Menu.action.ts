@@ -5,7 +5,7 @@ export const addMenu = (
   menuTitle: string,
   count: number,
   price: number,
-  
+
   orderState: any,
   setOrderState: any
 ) => {
@@ -39,6 +39,8 @@ export const clearMenu = (
   setOrderState({})
 }
 
+
+//TODO: hubungin ke API
 export const orderMenu = (
   orderState: any,
   setOrderState: any

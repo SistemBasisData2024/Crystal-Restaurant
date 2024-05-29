@@ -1,3 +1,7 @@
 export default function ErrorPage() {
-  return <div className='absolute left-0 top-0 -z-10 h-screen w-screen'>hi</div>
+  return (
+    <div className="-z-10 absolute h-screen w-screen bg-red-100 flex justify-center items-middle">
+      <h1>404 Not Found</h1>
+    </div>
+  )
 }

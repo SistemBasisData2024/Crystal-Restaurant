@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import ReactDOM from "react-dom/client"
-import { createBrowserRouter, RouterProvider } from "react-router-dom"
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 import "./index.css"
 
 import Navbar from "./components/Navbar.tsx"
@@ -13,10 +13,7 @@ import DetailsPage from "./pages/DetailsPage.tsx"
 
 // import { atom, createStore, Provider } from "jotai"
 
-
 // export const orderAtom = atom<Order[]>([])
-
-
 
 // const store = createStore()
 
@@ -30,39 +27,62 @@ function App() {
 
   const [orderState, setOrderState] = useState<Order[]>([])
 
-  const router = createBrowserRouter([
-    {
-      children: [
-        {
-          path: "/",
-          element: (
-            <MenuPage orderState={orderState} setOrderState={setOrderState} />
-          ),
-        },
-        {
-          path: "/color-palette",
-          element: <ColorPalette />,
-        },
-        {
-          path: "/login",
-          element: <LoginPage  />,
-        },
-        {
-          path: "/details",
-          element: <DetailsPage orderState={orderState} setOrderState={setOrderState} />,
-        },
-        {
-          path: "*",
-          element: <ErrorPage />,
-        },
-      ],
-    },
-  ])
-  
+  // const router = createBrowserRouter([
+  //   {
+  //     children: [
+  //       {
+  //         path: "/",
+  //         element: (
+  //           <MenuPage orderState={orderState} setOrderState={setOrderState} />
+  //         ),
+  //       },
+  //       {
+  //         path: "/color-palette",
+  //         element: <ColorPalette />,
+  //       },
+  //       {
+  //         path: "/login",
+  //         element: <LoginPage />,
+  //       },
+  //       {
+  //         path: "/details",
+  //         element: (
+  //           <DetailsPage
+  //             orderState={orderState}
+  //             setOrderState={setOrderState}
+  //           />
+  //         ),
+  //       },
+  //       {
+  //         path: "*",
+  //         element: <ErrorPage />,
+  //       },
+  //     ],
+  //   },
+  // ])
+
   return (
     <React.StrictMode>
-      <Navbar />
-      <RouterProvider router={router} />
+      <Router>
+        <Navbar />
+        <Routes>
+          <Route
+            path='/'
+            element={
+              <MenuPage orderState={orderState} setOrderState={setOrderState} />
+            }
+          />
+          <Route
+            path='/details'
+            element={
+              <DetailsPage orderState={orderState} setOrderState={setOrderState} />
+            }
+          />
+          <Route path='*' element={<ErrorPage />} />
+          <Route path='/color-palette' element={<ColorPalette />} />
+          <Route path='/login' element={<LoginPage />} />
+        </Routes>
+      </Router>
     </React.StrictMode>
   )
 }
