@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { addMenu } from "../actions/Menu.action"
 import Description from "./CardDetails"
+import { priceToIDR } from "../actions/Algorithm"
 
 // import { useAtom } from "jotai"
 // import { orderAtom } from "../main"
@@ -16,27 +17,23 @@ export default function FoodCards(props: {
   setOrderState: any
 }) {
   const [clicked, setClicked] = useState(true)
-
-  function priceToIDR(price: number): string {
-    const converted: string = new Intl.NumberFormat("id-ID", {
-      style: "currency",
-      currency: "IDR",
-    }).format(price)
-    return converted
-  }
+  const [isLoaded, setIsLoaded] = useState(false)
 
   return (
     <>
       <section
-        className={`w-[20em] overflow-auto rounded-[0.5em] border-2 border-bgprim-100 bg-bgsecon-200 text-[0.5rem] shadow transition-shadow duration-300 hover:shadow-xl hover:shadow-prim-500 hover:border-prim-100  md:text-[1rem]
+        className={`w-[20em] overflow-auto rounded-[0.5em] border-2 border-bgprim-100 bg-bgsecon-200 text-[0.5rem] shadow transition-shadow duration-300 hover:border-prim-100 hover:shadow-xl hover:shadow-prim-500  md:text-[1rem]
         `}
         id={`fc-${props.mykey}`}
       >
         <div className=' cursor-pointer' onMouseDown={() => setClicked(false)}>
           <img
-            className='h-[12em] w-full rounded-t-[0.5em] object-cover object-center'
+            className={`h-[12em] w-full rounded-t-[0.5em] object-cover object-center font-bold text-newwhite ${
+              isLoaded ? "" : "p-4"
+            }`}
             src={props.image}
-            alt={props.title}
+            alt={isLoaded ? props.title : "loading..."}
+            onLoad={() => setIsLoaded(true)}
           />
           <div className='p-[1.25em]'>
             <h5 className='mb-[0.5em] line-clamp-2 min-h-[3.125em] text-[2em] font-bold tracking-tight text-newwhite md:text-[1.25em]'>
