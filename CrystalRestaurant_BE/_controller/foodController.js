@@ -5,7 +5,7 @@ getAllFood = async(req, res) =>{
         const result = await pool.query(
             `SELECT * FROM food`
         );
-        res.status(200).json(result.rows[0]);
+        res.status(200).json(result.rows);
     }catch(err){
         console.error(err);
         res.status(500).json("false");
