@@ -1,6 +1,23 @@
 import logo from "../assets/logo.svg"
+import { userLogin } from "../actions/User.actions"
+import { useState } from "react"
 
 export default function LoginPage() {
+const [formdata, setFormData] = useState({
+  username: '',
+  password: '',
+})
+    
+const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
+  e.preventDefault()
+  console.log(formdata)
+  const response = userLogin(formdata)
+
+  response.then((res) => {
+    console.log(res)
+  })
+}
+
   return (
     <section className='absolute left-0 top-0 -z-10 h-screen w-screen bg-bgdull-200'>
       <div className='mx-auto flex h-screen flex-col items-center justify-center px-6 py-8 lg:py-0'>
@@ -16,20 +33,24 @@ export default function LoginPage() {
             <h1 className='text-center text-xl font-bold leading-tight tracking-tight text-newwhite md:text-2xl'>
               Sign in to your account
             </h1>
-            <form className='space-y-4' action='#'>
+            <form className='space-y-4' onSubmit={submitHandler}>
               <div>
                 <label
-                  htmlFor='email'
+                  htmlFor='unsername'
                   className='mb-2 block text-sm font-medium text-newwhite'
                 >
-                  Your email
+                  Your unsername
                 </label>
                 <input
-                  type='email'
-                  name='email'
-                  id='email'
+                  type='text'
+                  name='unsername'
+                  id='unsername'
                   className=' block w-full rounded-lg border-2 border-secon-500 bg-bgsecon-100 p-2.5 text-newwhite placeholder-gray-500 shadow focus:border-prim-300 focus:ring-prim-300 sm:text-sm'
                   placeholder='name@company.com'
+                  value={formdata.username}
+                  onChange={(e) => {
+                    setFormData({ ...formdata, username: e.target.value })
+                  }}
                   required
                 />
               </div>
@@ -47,6 +68,10 @@ export default function LoginPage() {
                   placeholder='••••••••'
                   className=' block w-full rounded-lg border-2 border-secon-500 bg-bgsecon-100 p-2.5 text-newwhite placeholder-gray-500 shadow focus:border-prim-300 focus:ring-prim-300 sm:text-sm'
                   required
+                  value={formdata.password}
+                  onChange={(e) => {
+                    setFormData({ ...formdata, password: e.target.value })
+                  }}
                 />
               </div>
               <div className='flex items-center justify-between'>

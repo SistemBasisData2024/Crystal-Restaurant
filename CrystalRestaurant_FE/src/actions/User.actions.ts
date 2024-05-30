@@ -2,29 +2,30 @@ import axios from "axios";
 
 //formData = req.body
 
-const baseApiResponse = (data, isSuccess) => {
+const baseApiResponse = (data: any, isSuccess: any) => {
     return {
         success: isSuccess,
         data: data || null,
     };
 };
 
-export const userLogin = async (formData) => {
+export const userLogin = async (formData: any) => {
     try{
         const response = await axios.post(
             `${import.meta.env.VITE_API_URL}/user/login`,
             formData
         );
-        console.log("RESPONSE FROM BACKEND");
+        // console.log("RESPONSE FROM BACKEND");
         console.log(response.data);
         return baseApiResponse(response.data, true);
-    } catch (error) {
-        console.error(error);
-        return baseApiResponse(null, false);
+    } catch (error: any) {
+        const errorResponse = error.response.data;
+        // console.error(error);
+        return baseApiResponse(errorResponse, false)
     }
 }
 
-export const userSignUp = async (formData) => {
+export const userSignUp = async (formData: any) => {
     try {
         const response = await axios.post(
             `${import.meta.env.VITE_API_URL}/user/signup`,
@@ -33,7 +34,7 @@ export const userSignUp = async (formData) => {
         console.log("RESPONSE FROM BACKEND");
         console.log(response.data);
         return baseApiResponse(response.data, true);
-    } catch (error) {
+    } catch (error: any) {
         console.error(error);
         return baseApiResponse(null, false);
     }

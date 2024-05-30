@@ -8,10 +8,10 @@ export default function Table(props: {
         <th scope='col' className='px-6 py-3'>
           Title
         </th>
-        <th scope='col' className='px-6 py-3'>
+        <th scope='col' className='hidden px-6 py-3 md:inline'>
           Price
         </th>
-        <th scope='col' className='px-6 py-3'>
+        <th scope='col' className='hidden px-6 py-3 md:inline'>
           Quantity
         </th>
         <th scope='col' className='px-6 py-3'>
@@ -38,9 +38,13 @@ export default function Table(props: {
         >
           {props.title}
         </th>
-        <td className='px-6 py-4'>{props.toIDR(props.price)}</td>
-        <td className='px-6 py-4'>{props.quantity}</td>
-        <td className='px-6 py-4'>{props.toIDR(props.quantity * props.price)}</td>
+        <td className='hidden px-6 py-4 md:inline'>
+          {props.toIDR(props.price)}
+        </td>
+        <td className='hidden px-6 py-4 md:inline'>{props.quantity}</td>
+        <td className='px-6 py-4'>
+          {props.toIDR(props.quantity * props.price)}
+        </td>
         <td className='px-6 py-4'>
           <a
             href='#'
