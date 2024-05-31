@@ -1,4 +1,5 @@
 import { useState } from "react"
+import { addMenu } from "../../../actions/Menu.action"
 
 export default function Description(props: {
   title: string
@@ -9,6 +10,8 @@ export default function Description(props: {
   clicked: boolean
   setCLicked: (clicked: boolean) => void
   priceToIDR: (price: number) => string
+  orderState: any
+  setOrderState: any
 }) {
   const [isLoaded, setIsLoaded] = useState(false)
 
@@ -49,7 +52,14 @@ export default function Description(props: {
           <p className='line-clamp-3 text-[0.875em] font-normal text-newwhite'>
             {props.description}
           </p>
-          <div className='mt-[2em] inline-flex cursor-pointer items-center rounded-[0.5em] border-[0.125em] border-prim-100 bg-newwhite px-[0.5em] py-[0.5em] text-center text-[0.875em] font-medium text-prim-100 transition-colors duration-200 ease-out hover:bg-prim-100 hover:text-newwhite focus:outline-none focus:ring-2 focus:ring-prim-400'>
+          <div className='mt-[2em] inline-flex cursor-pointer items-center rounded-[0.5em] border-[0.125em] border-prim-100 bg-newwhite px-[0.5em] py-[0.5em] text-center text-[0.875em] font-medium text-prim-100 transition-colors duration-200 ease-out hover:bg-prim-100 hover:text-newwhite focus:outline-none focus:ring-2 focus:ring-prim-400' onClick={() => addMenu(
+            props.mykey,
+            props.title,
+            1,
+            props.price,
+            props.orderState,
+            props.setOrderState
+          )}>
             Add to cart
           </div>
         </div>

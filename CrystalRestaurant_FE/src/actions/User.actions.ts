@@ -29,7 +29,7 @@ export const userLogin = async (formData: any) => {
         // console.log("RESPONSE FROM BACKEND");
         console.log(response.data);
         return baseApiResponse(response.data, true);
-    } catch (error: any) {
+    } catch (error: any){
         const errorResponse = error.response.data;
         // console.error(error);
         return baseApiResponse(errorResponse, false)
