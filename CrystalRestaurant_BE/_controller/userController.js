@@ -23,6 +23,7 @@ signUp = async(req, res) =>{
 
 login = async(req, res) =>{
     const{username, password} = req.body;
+    console.log(req.body);
     try{
         const result = await pool.query(
             `SELECT * FROM Users WHERE username = $1 AND password = $2`,
@@ -30,7 +31,7 @@ login = async(req, res) =>{
         );
 
         if(result.rows.length == 0){
-            return res.status(300).json("user not found");
+            return res.status(401).json("user not found");
         }
         
         res.status(200).json(result.rows[0]);
