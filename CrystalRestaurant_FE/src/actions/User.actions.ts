@@ -2,6 +2,12 @@ import axios from "axios";
 
 //formData = req.body
 
+/**
+ * 
+ * @param data  //data from the backend
+ * @param isSuccess  //boolean value to check if the request was successful or not
+ * @returns  //returns the data and the success status
+ */
 const baseApiResponse = (data: any, isSuccess: any) => {
     return {
         success: isSuccess,
@@ -9,6 +15,11 @@ const baseApiResponse = (data: any, isSuccess: any) => {
     };
 };
 
+/**
+ * 
+ * @param formData // object containing the username and password
+ * @returns baseApiResponse // returns the response from the backend
+ */
 export const userLogin = async (formData: any) => {
     try{
         const response = await axios.post(
@@ -25,6 +36,11 @@ export const userLogin = async (formData: any) => {
     }
 }
 
+/**
+ * 
+ * @param formData // object containing the username, password, email, and name
+ * @returns // returns the response from the backend
+ */
 export const userSignUp = async (formData: any) => {
     try {
         const response = await axios.post(

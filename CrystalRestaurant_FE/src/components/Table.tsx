@@ -1,7 +1,17 @@
+/**
+ * 
+ * @param orderState // array of objects containing the order details
+ * @param toIDR // function to convert price to IDR
+ * @returns // returns the table component
+ */
 export default function Table(props: {
   orderState: any
   toIDR: (price: number) => string
 }) {
+  /**
+   * 
+   * @returns // returns the table header
+   */
   const RowHead = () => {
     return (
       <tr>
@@ -24,6 +34,14 @@ export default function Table(props: {
     )
   }
 
+  /**
+   * 
+   * @param title // title of the order
+   * @param price // price of the order
+   * @param quantity // quantity of the order
+   * @param toIDR // function to convert price to IDR
+   * @returns // returns the table row
+   */
   const Row = (props: {
     title: string
     price: number

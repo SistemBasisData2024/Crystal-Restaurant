@@ -5,7 +5,7 @@ import "./index.css"
 
 import Navbar from "./components/Navbar.tsx"
 
-import MenuPage from "./pages/MenuPage.tsx"
+import MenuPage from "./pages/MenuPage/MenuPage.tsx"
 import ColorPalette from "./pages/ColorPalette.tsx"
 import ErrorPage from "./pages/ErrorPage.tsx"
 import LoginPage from "./pages/LoginPage.tsx"

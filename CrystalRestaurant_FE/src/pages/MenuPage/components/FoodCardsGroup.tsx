@@ -1,5 +1,5 @@
 import FoodCards from "./FoodCards"
-import Topaz from "../assets/maxresdefault.jpg"
+import Topaz from "../../../assets/maxresdefault.jpg"
 
 export default function FoodCardsGroup(props: { orderState: any; setOrderState: any }) {
   const data = [

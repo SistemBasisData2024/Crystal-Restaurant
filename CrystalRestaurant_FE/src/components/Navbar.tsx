@@ -2,6 +2,11 @@ import { useState } from "react"
 import Logo from "../assets/logo.svg"
 import { Link } from "react-router-dom"
 
+/**
+ * 
+ * @returns Navbar component
+ * @var isOpen //state to check if the navbar is open or not
+ */
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
 

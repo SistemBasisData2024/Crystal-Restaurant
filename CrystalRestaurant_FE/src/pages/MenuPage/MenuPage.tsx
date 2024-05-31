@@ -1,5 +1,5 @@
-import { fullScreen, bgGradient } from "../tailwinds/templates"
-import FoodCardsGroup from "../components/FoodCardsGroup"
+import { fullScreen, bgGradient } from "../../tailwinds/templates"
+import FoodCardsGroup from "./components/FoodCardsGroup"
 
 function Menu(props: {orderState: any, setOrderState:any}) {
   return (

@@ -1,7 +1,7 @@
 import { useState } from "react"
-import { addMenu } from "../actions/Menu.action"
+import { addMenu } from "../../../actions/Menu.action"
 import Description from "./CardDetails"
-import { priceToIDR } from "../actions/Algorithm"
+import { priceToIDR } from "../../../actions/Algorithm"
 
 // import { useAtom } from "jotai"
 // import { orderAtom } from "../main"
