@@ -1,7 +1,7 @@
 import { fullScreen, bgGradient } from "../../tailwinds/templates"
 import FoodCardsGroup from "./components/FoodCardsGroup"
 
-function Menu(props: {orderState: any, setOrderState:any}) {
+function Menu() {
   return (
     <div
       className={
@@ -9,10 +9,7 @@ function Menu(props: {orderState: any, setOrderState:any}) {
       }
     >
       <section className='flex h-fit w-screen flex-col overflow-y-visible py-8 md:w-[800px] lg:w-[1200px]'>
-        <FoodCardsGroup
-          orderState={props.orderState}
-          setOrderState={props.setOrderState}
-        />
+        <FoodCardsGroup />
       </section>
     </div>
   )

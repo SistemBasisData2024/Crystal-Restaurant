@@ -1,7 +1,7 @@
 import FoodCards from "./FoodCards"
 import Topaz from "../../../assets/maxresdefault.jpg"
 
-export default function FoodCardsGroup(props: { orderState: any; setOrderState: any }) {
+export default function FoodCardsGroup() {
   const data = [
     {
       id: 1,
@@ -40,8 +40,6 @@ export default function FoodCardsGroup(props: { orderState: any; setOrderState: 
           price={item.price}
           image={item.image}
           description={item.description}
-          orderState={props.orderState}
-          setOrderState={props.setOrderState}
         />
       ))}
     </div>

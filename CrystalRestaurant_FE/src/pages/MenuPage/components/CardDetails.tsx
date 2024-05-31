@@ -1,6 +1,9 @@
 import { useState } from "react"
 import { addMenu } from "../../../actions/Menu.action"
 
+import { useAtom } from "jotai"
+import { orderAtom } from "../../../main"
+
 export default function Description(props: {
   title: string
   description: string
@@ -10,10 +13,10 @@ export default function Description(props: {
   clicked: boolean
   setCLicked: (clicked: boolean) => void
   priceToIDR: (price: number) => string
-  orderState: any
-  setOrderState: any
 }) {
   const [isLoaded, setIsLoaded] = useState(false)
+
+  const [orderState, setOrderState] = useAtom(orderAtom)
 
   return (
     <section className='absolute left-0 top-0 z-10 h-screen w-screen text-[1rem]'>
@@ -57,8 +60,8 @@ export default function Description(props: {
             props.title,
             1,
             props.price,
-            props.orderState,
-            props.setOrderState
+            orderState,
+            setOrderState
           )}>
             Add to cart
           </div>

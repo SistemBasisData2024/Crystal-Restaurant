@@ -26,15 +26,6 @@ export const orderAtom = atom<Order[]>([])
 // const store = createStore()
 
 function App() {
-  interface Order {
-    id: number
-    title: string
-    price: number
-    quantity: number
-  }
-
-  const [orderState, setOrderState] = useState<Order[]>([])
-
   return (
     <React.StrictMode>
       <Router>
@@ -43,13 +34,13 @@ function App() {
           <Route
             path='/'
             element={
-              <MenuPage orderState={orderState} setOrderState={setOrderState} />
+              <MenuPage />
             }
           />
           <Route
             path='/details'
             element={
-              <DetailsPage orderState={orderState} setOrderState={setOrderState} />
+              <DetailsPage />
             }
           />
           <Route path='*' element={<ErrorPage />} />
