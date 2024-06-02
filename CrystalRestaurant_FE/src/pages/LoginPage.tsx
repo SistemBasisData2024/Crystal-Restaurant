@@ -1,6 +1,7 @@
 import logo from "../assets/logo.svg"
 import { userLogin } from "../actions/User.actions"
 import { useState } from "react"
+import { Link } from "react-router-dom"
 
 export default function LoginPage() {
 const [formdata, setFormData] = useState({
@@ -14,7 +15,15 @@ const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
   const response = userLogin(formdata)
 
   response.then((res) => {
-    console.log(res)
+    if (res.success) {
+      console.log("Login successful")
+      window.location.href = "/"
+      return
+    }
+    else {
+      console.log("Login failed")
+      alert ("Login failed")
+    }
   })
 }
 
@@ -36,17 +45,17 @@ const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
             <form className='space-y-4' onSubmit={submitHandler}>
               <div>
                 <label
-                  htmlFor='unsername'
+                  htmlFor='username'
                   className='mb-2 block text-sm font-medium text-newwhite'
                 >
-                  Your unsername
+                  Your username
                 </label>
                 <input
                   type='text'
                   name='unsername'
-                  id='unsername'
+                  id='unsernameLogin'
                   className=' block w-full rounded-lg border-2 border-secon-500 bg-bgsecon-100 p-2.5 text-newwhite placeholder-gray-500 shadow focus:border-prim-300 focus:ring-prim-300 sm:text-sm'
-                  placeholder='name@company.com'
+                  placeholder='username'
                   value={formdata.username}
                   onChange={(e) => {
                     setFormData({ ...formdata, username: e.target.value })
@@ -64,7 +73,7 @@ const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
                 <input
                   type='password'
                   name='password'
-                  id='password'
+                  id='passwordLogin'
                   placeholder='••••••••'
                   className=' block w-full rounded-lg border-2 border-secon-500 bg-bgsecon-100 p-2.5 text-newwhite placeholder-gray-500 shadow focus:border-prim-300 focus:ring-prim-300 sm:text-sm'
                   required
@@ -75,22 +84,7 @@ const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
                 />
               </div>
               <div className='flex items-center justify-between'>
-                <div className='flex items-start'>
-                  <div className='flex h-5 items-center'>
-                    <input
-                      id='remember'
-                      aria-describedby='remember'
-                      type='checkbox'
-                      className='focus:ring-3 h-4 w-4 rounded border-2 border-secon-500 bg-bgsecon-100 ring-offset-bgsecon-200'
-                      required
-                    />
-                  </div>
-                  <div className='ml-3 text-sm'>
-                    <label htmlFor='remember' className='text-newwhite'>
-                      Remember me
-                    </label>
-                  </div>
-                </div>
+                <div className='flex items-start'/>
                 <a
                   href='#'
                   className='text-sm font-medium text-prim-200 hover:underline'
@@ -106,12 +100,12 @@ const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
               </button>
               <p className='text-sm font-light text-newwhite'>
                 Don’t have an account yet?{" "}
-                <a
-                  href='#'
+                <Link
+                  to='../register'
                   className='font-medium text-prim-200 hover:underline'
                 >
                   Sign up
-                </a>
+                </Link>
               </p>
             </form>
           </div>

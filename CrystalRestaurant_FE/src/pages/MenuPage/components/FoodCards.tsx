@@ -1,10 +1,10 @@
 import { useState } from "react"
-import { addMenu } from "../actions/Menu.action"
+import { addMenu } from "../../../actions/Menu.action"
 import Description from "./CardDetails"
-import { priceToIDR } from "../actions/Algorithm"
+import { priceToIDR } from "../../../actions/Algorithm"
 
-// import { useAtom } from "jotai"
-// import { orderAtom } from "../main"
+import { useAtom } from "jotai"
+import { orderAtom } from "../../../main"
 
 export default function FoodCards(props: {
   id: number
@@ -13,11 +13,11 @@ export default function FoodCards(props: {
   image: string
   price: number
   mykey: number
-  orderState: any
-  setOrderState: any
 }) {
   const [clicked, setClicked] = useState(true)
   const [isLoaded, setIsLoaded] = useState(false)
+
+  const [orderState, setOrderState] = useAtom(orderAtom)
 
   return (
     <>
@@ -55,8 +55,8 @@ export default function FoodCards(props: {
               props.title,
               1,
               props.price,
-              props.orderState,
-              props.setOrderState
+              orderState,
+              setOrderState
             )
 
             console.log(props.title)
