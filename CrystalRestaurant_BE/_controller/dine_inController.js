@@ -14,9 +14,9 @@ createSession = async(req, res) => {
     const qr_code = "http://localhost:5173/" + hashedSession;
     try{
         const result = await pool.query(
-            `INSERT INTO Dine_in(qr_code, dine_time)
-            VALUES($1, $2) RETURNING *`,
-            [qr_code, indonesiaTime]
+            `INSERT INTO Dine_in(qr_code, dine_time, isExp)
+            VALUES($1, $2, $3) RETURNING *`,
+            [qr_code, indonesiaTime, 0]
         );
         res.status(200).json(result.rows[0]);
     }catch(err){
