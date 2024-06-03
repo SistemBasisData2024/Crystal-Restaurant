@@ -64,7 +64,7 @@ function Navbar() {
             </li>
             <li>
               <Link
-                to='#'
+                to='/order'
                 className='block rounded px-3 py-2 text-white hover:bg-bgdull-100 hover:text-white md:border-0 md:p-0 md:hover:bg-transparent md:hover:text-prim-100'
               >
                 Order
@@ -72,15 +72,7 @@ function Navbar() {
             </li>
             <li>
               <Link
-                to='/details'
-                className='block rounded px-3 py-2 text-white hover:bg-bgdull-100 hover:text-white md:border-0 md:p-0 md:hover:bg-transparent md:hover:text-prim-100'
-              >
-                Details
-              </Link>
-            </li>
-            <li>
-              <Link
-                to='#'
+                to='/payment'
                 className='block rounded px-3 py-2 text-white hover:bg-bgdull-100 hover:text-white md:border-0 md:p-0 md:hover:bg-transparent md:hover:text-prim-100'
               >
                 Pay

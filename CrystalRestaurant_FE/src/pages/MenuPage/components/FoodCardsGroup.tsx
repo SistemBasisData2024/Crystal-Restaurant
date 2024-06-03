@@ -5,7 +5,7 @@ export default function FoodCardsGroup() {
   const data = [
     {
       id: 1,
-      title: "tes 1",
+      title: "tes 1 asdas das daf sd asgasfgd asdfasdfas dfasd fas df",
       price: 100000,
       image: Topaz,
       description:
