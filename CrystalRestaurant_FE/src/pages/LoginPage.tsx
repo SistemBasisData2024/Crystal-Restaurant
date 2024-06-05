@@ -2,6 +2,9 @@ import logo from "../assets/logo.svg"
 import { userLogin } from "../actions/User.actions"
 import { useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
+import { useAtom } from "jotai"
+
+import { usernameAtom } from "../main"
 
 export default function LoginPage() {
   const [formdata, setFormData] = useState({
@@ -9,6 +12,7 @@ export default function LoginPage() {
     password: "",
   })
   const [isLoaded, setIsLoaded] = useState(false)
+  const [_, setUsername] = useAtom(usernameAtom)
 
   const navigate = useNavigate()
 
@@ -23,7 +27,7 @@ export default function LoginPage() {
         if (res.success) {
           console.log("Login successful")
           navigate("/menu")
-          localStorage.setItem("username", formdata.username)
+          setUsername(formdata.username)
           return
         } else {
           throw new Error("Login failed")

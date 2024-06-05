@@ -1,20 +1,30 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import Logo from "../assets/logo.svg"
 import { Link } from "react-router-dom"
+import { useAtom } from "jotai"
+
+import { usernameAtom } from "../main"
 
 /**
- * 
+ *
  * @returns Navbar component
  * @var isOpen //state to check if the navbar is open or not
  */
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
-  const [username, setUsername] = useState(localStorage.getItem("username"))
+  const [username, setUsername] = useAtom(usernameAtom)
+
+  useEffect(() => {
+    setUsername(username || "")
+  }, [username])
 
   return (
-    <nav className=' sticky top-0 border-gray-200 bg-bgsecon-100 bg-opacity-90 backdrop-blur-md backdrop-filter z-20'>
+    <nav className=' sticky top-0 z-20 border-gray-200 bg-bgsecon-100 bg-opacity-90 backdrop-blur-md backdrop-filter'>
       <div className='mx-auto flex max-w-screen-xl flex-wrap items-center justify-between p-4'>
-        <Link to='/' className='flex items-center space-x-3 rtl:space-x-reverse'>
+        <Link
+          to='/'
+          className='flex items-center space-x-3 rtl:space-x-reverse'
+        >
           <img src={Logo} className='h-8' alt='Flowbite Logo' />
           <span className='self-center whitespace-nowrap text-2xl font-semibold text-white'>
             Crystal Restaurant

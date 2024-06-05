@@ -11,6 +11,8 @@ import ErrorPage from "./pages/ErrorPage.tsx"
 import LoginPage from "./pages/LoginPage.tsx"
 import OrderPage from "./pages/OrderPage.tsx"
 import RegisterPage from "./pages/RegisterPage.tsx"
+import ProfilePage from "./pages/ProfilePage.tsx"
+import AdminPage from "./pages/AdminPage.tsx"
 
 import { atom, /*createStore,*/ Provider } from "jotai"
 
@@ -22,6 +24,7 @@ interface Order {
 }
 
 export const orderAtom = atom<Order[]>([])
+export const usernameAtom = atom<string | null>(null)
 
 // const store = createStore()
 
@@ -38,6 +41,8 @@ function App() {
           <Route path='/color-palette' element={<ColorPalette />} />
           <Route path='/login' element={<LoginPage />} />
           <Route path='/register' element={<RegisterPage />} />
+          <Route path='/profile' element={<ProfilePage />} />
+          <Route path='/admin' element={<AdminPage />} />
         </Routes>
       </Router>
     </React.StrictMode>
