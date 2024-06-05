@@ -1,6 +1,6 @@
 import React from "react"
 import ReactDOM from "react-dom/client"
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom"
 import "./index.css"
 
 import Navbar from "./components/Navbar.tsx"
@@ -31,7 +31,8 @@ function App() {
       <Router>
         <Navbar />
         <Routes>
-          <Route path='/' element={<MenuPage />} />
+          <Route path='/' element={<Navigate to='/menu' />} />
+          <Route path='/menu' element={<MenuPage />} />
           <Route path='/order' element={<OrderPage />} />
           <Route path='*' element={<ErrorPage />} />
           <Route path='/color-palette' element={<ColorPalette />} />

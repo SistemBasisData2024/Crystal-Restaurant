@@ -75,8 +75,6 @@ export default function FoodCards(props: {
             clicked={clicked}
             setCLicked={setClicked}
             priceToIDR={priceToIDR}
-            orderState={props.orderState}
-            setOrderState={props.setOrderState}
           />
         )}
       </section>

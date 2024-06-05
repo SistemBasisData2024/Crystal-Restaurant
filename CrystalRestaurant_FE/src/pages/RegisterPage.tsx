@@ -1,7 +1,7 @@
 import logo from "../assets/logo.svg"
 import { userSignUp } from "../actions/User.actions"
 import { useState } from "react"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 
 export default function RegisterPage() {
   const [formdata, setFormData] = useState({
@@ -9,32 +9,41 @@ export default function RegisterPage() {
     password: "",
   })
   const [confirmPassword, setConfirmPassword] = useState("")
+  const [isLoaded, setIsLoaded] = useState(false)
+
+  const navigate = useNavigate()
 
   const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+    setIsLoaded(true)
+
     if (formdata.password !== confirmPassword) {
       alert("Passwords do not match")
       return
     }
-    // console.log(formdata)
     const response = userSignUp(formdata)
 
-    response.then((res) => {
-      console.log(res)
-      if (res.success) {
-        console.log("Registration successful")
-        // back to login page
-        window.location.href = "/login"
-        return
-      } else {
-        console.log("Registration failed")
+    response
+      .then((res) => {
+        console.log(res)
+        if (res.success) {
+          console.log("Registration successful")
+          navigate("/login")
+          return
+        } else {
+          throw new Error("Registration failed")
+        }
+      })
+      .catch(() => {
         alert("Registration failed")
-      }
-    })
+      })
+      .finally(() => {
+        setIsLoaded(false)
+      })
   }
 
   return (
-    <section className='absolute left-0 top-0 -z-10 h-screen w-screen text-newwhite bg-bgdull-200'>
+    <section className='absolute left-0 top-0 -z-10 h-screen w-screen bg-bgdull-200 text-newwhite'>
       <div className='mx-auto flex h-screen flex-col items-center justify-center px-6 py-8 lg:py-0'>
         <a
           href='#'
@@ -46,7 +55,7 @@ export default function RegisterPage() {
         <div className='w-full rounded-2xl border-2 border-secon-500 bg-bgsecon-100 duration-300 hover:border-prim-100 hover:shadow-xl hover:shadow-prim-500 sm:max-w-md md:mt-0 xl:p-0'>
           <div className='space-y-8 p-6 sm:p-8'>
             <h1 className='text-center text-xl font-bold leading-tight tracking-tight text-newwhite md:text-2xl'>
-              Sign up 
+              Sign up
             </h1>
             <form className='space-y-4' onSubmit={submitHandler}>
               <div>
@@ -109,7 +118,7 @@ export default function RegisterPage() {
                   }}
                 />
               </div>
-              
+
               <button
                 type='submit'
                 className='hover:bg-primary-700 hover:bg-primary-700 w-full rounded-lg bg-prim-300 px-5 py-2.5 text-center text-sm font-medium text-newwhite focus:outline-none focus:ring-4'
@@ -122,7 +131,7 @@ export default function RegisterPage() {
                   to='../login'
                   className='font-medium text-prim-200 hover:underline'
                 >
-                  Login
+                  {isLoaded ? "Loading..." : "Sign in"}
                 </Link>
               </p>
             </form>

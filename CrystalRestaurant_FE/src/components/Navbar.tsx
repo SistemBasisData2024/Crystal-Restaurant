@@ -9,6 +9,7 @@ import { Link } from "react-router-dom"
  */
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
+  const [username, setUsername] = useState(localStorage.getItem("username"))
 
   return (
     <nav className=' sticky top-0 border-gray-200 bg-bgsecon-100 bg-opacity-90 backdrop-blur-md backdrop-filter z-20'>
@@ -80,10 +81,10 @@ function Navbar() {
             </li>
             <li>
               <Link
-                to='#'
+                to={username ? "/profile" : "/login"}
                 className='block rounded px-3 py-2 text-white hover:bg-bgdull-100 hover:text-white md:border-0 md:p-0 md:hover:bg-transparent md:hover:text-prim-100'
               >
-                Profile
+                {username ? "Profile" : "Login"}
               </Link>
             </li>
           </ul>
