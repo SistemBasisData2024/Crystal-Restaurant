@@ -20,7 +20,19 @@ createSession = async(req, res) => {
             [qr_code, indonesiaTime, 0, hashedSession]
         );
         res.status(200).json(result.rows[0]);
-    }catch(err){
+    } catch(err){
+        console.error(err);
+        res.status(500).json("false");
+    }
+}
+
+getAllSession = async(req, res) => {
+    try{
+        const result = await pool.query(
+            `SELECT session FROM Dine_in`
+        );
+        res.status(200).json(result.rows);
+    } catch(err){
         console.error(err);
         res.status(500).json("false");
     }
@@ -28,4 +40,5 @@ createSession = async(req, res) => {
 
 module.exports = {
     createSession,
+    getAllSession,
 }
