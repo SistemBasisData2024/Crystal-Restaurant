@@ -11,6 +11,7 @@ export default function OrderPage() {
 
   const handleOrder = () => {
     console.table(orderState)
+    console.log(orderState)
     setOrderSuccess(true)
   }
 

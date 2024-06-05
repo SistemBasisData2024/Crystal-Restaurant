@@ -27,12 +27,12 @@ export default function FoodCards(props: {
         id={`fc-${props.mykey}`}
       >
         <div className=' cursor-pointer' onMouseDown={() => setClicked(false)}>
-          <img
+          <iframe
             className={`h-[12em] w-full rounded-t-[0.5em] object-cover object-center font-bold text-newwhite ${
               isLoaded ? "" : "p-4"
             }`}
             src={props.image}
-            alt={isLoaded ? props.title : "loading..."}
+            // alt={isLoaded ? props.title : "loading..."}
             onLoad={() => setIsLoaded(true)}
           />
           <div className='p-[1.25em]'>

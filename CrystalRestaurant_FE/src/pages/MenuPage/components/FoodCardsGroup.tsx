@@ -15,7 +15,8 @@ export default function FoodCardsGroup() {
       id: 1,
       title: "Tes 2",
       price: 10000,
-      image: "https://picsum.photos/seed/picsum/200/300",
+      image:
+        "https://drive.google.com/file/d/1DWpGAyj-Kt60OsYgHNR5BQipce3PChvc/preview",
       description:
         "Here are the biggest enterprise technology acquisitions of 2021 so far, in reverse chronological order.",
     },
@@ -23,7 +24,8 @@ export default function FoodCardsGroup() {
       id: 1,
       title: "Tes 3",
       price: 10000,
-      image: "https://picsum.photos/seed/picsum/200/300",
+      image:
+        "https://drive.google.com/file/d/1DWpGAyj-Kt60OsYgHNR5BQipce3PChvc/preview",
       description:
         "Here are the biggest enterprise technology acquisitions of 2021 so far, in reverse chronological order.",
     },
