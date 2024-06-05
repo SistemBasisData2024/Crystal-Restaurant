@@ -1,31 +1,54 @@
 import logo from "../assets/logo.svg"
 import { userLogin } from "../actions/User.actions"
-import { useState } from "react"
-import { Link } from "react-router-dom"
+import { useState, useEffect } from "react"
+import { Link, useNavigate } from "react-router-dom"
+import { useAtom } from "jotai"
+
+import { usernameAtom } from "../main"
 
 export default function LoginPage() {
-const [formdata, setFormData] = useState({
-  username: '',
-  password: '',
-})
-    
-const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
-  e.preventDefault()
-  console.log(formdata)
-  const response = userLogin(formdata)
-
-  response.then((res) => {
-    if (res.success) {
-      console.log("Login successful")
-      window.location.href = "/"
-      return
-    }
-    else {
-      console.log("Login failed")
-      alert ("Login failed")
-    }
+  const [formdata, setFormData] = useState({
+    username: "",
+    password: "",
   })
-}
+  const [isLoaded, setIsLoaded] = useState(false)
+  const [_, setUsername] = useAtom(usernameAtom)
+  const [parentLocation, setParentLocation] = useState(
+    location.pathname.split("/")[1]
+  )
+
+  useEffect(() => {
+    if (parentLocation !== location.pathname) {
+      setParentLocation(location.pathname.split("/")[1])
+    }
+  }, [location.pathname])
+
+  const navigate = useNavigate()
+
+  const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    setIsLoaded(true)
+
+    const response = userLogin(formdata)
+
+    response
+      .then((res) => {
+        if (res.success) {
+          console.log("Login successful")
+          navigate("/menu")
+          setUsername(formdata.username)
+          return
+        } else {
+          throw new Error("Login failed")
+        }
+      })
+      .catch(() => {
+        alert("Login failed")
+      })
+      .finally(() => {
+        setIsLoaded(false)
+      })
+  }
 
   return (
     <section className='absolute left-0 top-0 -z-10 h-screen w-screen bg-bgdull-200'>
@@ -84,7 +107,7 @@ const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
                 />
               </div>
               <div className='flex items-center justify-between'>
-                <div className='flex items-start'/>
+                <div className='flex items-start' />
                 <a
                   href='#'
                   className='text-sm font-medium text-prim-200 hover:underline'
@@ -96,12 +119,12 @@ const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
                 type='submit'
                 className='hover:bg-primary-700 hover:bg-primary-700 w-full rounded-lg bg-prim-300 px-5 py-2.5 text-center text-sm font-medium text-newwhite focus:outline-none focus:ring-4'
               >
-                Sign in
+                {isLoaded ? "Loading..." : "Sign in"}
               </button>
               <p className='text-sm font-light text-newwhite'>
                 Don’t have an account yet?{" "}
                 <Link
-                  to='../register'
+                  to={"/" + parentLocation + "/register"}
                   className='font-medium text-prim-200 hover:underline'
                 >
                   Sign up

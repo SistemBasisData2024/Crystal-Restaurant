@@ -2,7 +2,8 @@ import axios from "axios";
 
 // formData => req.body (used for param in endpoint call)
 
-const baseApiResponse = (data, isSuccess) => {
+const baseApiResponse = (
+    data: any, isSuccess: boolean) => {
     return {
         success: isSuccess,
         data: data || null,
@@ -17,8 +18,12 @@ export const dineIn = async () => {
         console.log("RESPONSE FROM BACKEND");
         console.log(response.data);
         return baseApiResponse(response.data, true);
-    } catch (error) {
+    } catch (error: any) {
         console.error(error);
         return baseApiResponse(null, false);
     }
 };
+
+export const getSession = async () => {
+    return ["c843498a969d5b8456b34bdd1548d977", "b843498a969d5b8456b34b2d1548d977"]
+}
