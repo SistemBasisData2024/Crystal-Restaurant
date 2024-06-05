@@ -25,5 +25,16 @@ export const dineIn = async () => {
 };
 
 export const getSession = async () => {
-    return ["c843498a969d5b8456b34bdd1548d977", "b843498a969d5b8456b34b2d1548d977"]
+    try {
+        const response = await axios.post(
+            `${import.meta.env.VITE_API_URL}/dine/getall`
+        );
+        // console.log("RESPONSE FROM BACKEND");
+        // console.log(response.data);
+        return baseApiResponse(response.data, true);
+
+    } catch (error: any) {
+        //console.error(error);
+        return baseApiResponse(null, false);
+    }
 }
