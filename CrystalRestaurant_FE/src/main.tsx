@@ -15,7 +15,7 @@ import ProfilePage from "./pages/ProfilePage.tsx"
 import AdminPage from "./pages/AdminPage.tsx"
 
 import { atom, Provider, useAtom } from "jotai"
-import { getSession } from "./actions/Dine.actions.ts"
+import { dineIn, getSession } from "./actions/Dine.actions.ts"
 interface Order {
   id: number
   title: string
@@ -31,7 +31,9 @@ function App() {
 
   useEffect(() => {
     getSession().then((data) => {
-      setSessions(data)
+      if (data.data) {
+        setSessions(data.data)
+      }
     })
   }, [])
 
@@ -70,11 +72,18 @@ function App() {
               element={<RegisterPage />}
             />
           ))}
-          <Route path='/' element={<h1>hellowold</h1>} />
+          <Route path='/' element={<button className="bg-black text-white p-4 rounded" onMouseDown={dineIn}>
+            Dine In
+          </button>} />
           <Route path='*' element={<ErrorPage />} />
           {/* <Route path='/color-palette' element={<ColorPalette />} /> */}
-          <Route path='/profile' element={<ProfilePage />} />
+          {sessions.map((session) => (
+            <Route key={session} path={`/${session}/profile`} element={<ProfilePage />} />
+          ))}
+          <Route path='/profile/*' element={<ProfilePage />} />
           <Route path='/admin' element={<AdminPage />} />
+          <Route path='/login/*' element={<LoginPage />} />
+          <Route path='/register/*' element={<RegisterPage />} />
         </Routes>
       </Router>
     </React.StrictMode>

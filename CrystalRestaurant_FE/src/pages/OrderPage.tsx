@@ -3,17 +3,29 @@ import TableEditable from "../components/TableEditable"
 
 import { useAtom } from "jotai"
 import { orderAtom } from "../main"
-import { useState } from "react"
+import { useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom"
 
 export default function OrderPage() {
   const [orderState, setOrderState] = useAtom(orderAtom)
   const [orderSuccess, setOrderSuccess] = useState(false)
+  const navigate = useNavigate()
 
   const handleOrder = () => {
     console.table(orderState)
     console.log(orderState)
     setOrderSuccess(true)
   }
+
+  const [parentLocation, setParentLocation] = useState(
+    location.pathname.split("/")[1]
+  )
+
+  useEffect(() => {
+    if (parentLocation !== location.pathname) {
+      setParentLocation(location.pathname.split("/")[1])
+    }
+  }, [location.pathname])
 
   return (
     <>
@@ -53,7 +65,7 @@ export default function OrderPage() {
               <button
                 className='m-4 mx-auto rounded-lg bg-prim-100 px-4 py-2 font-bold text-newwhite shadow-lg'
                 onMouseDown={() => {
-                  window.location.href = "/"
+                  navigate(`/${parentLocation}/menu`)
                 }}
               >
                 OK

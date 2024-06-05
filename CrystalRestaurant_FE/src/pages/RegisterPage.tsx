@@ -37,7 +37,7 @@ export default function RegisterPage() {
         console.log(res)
         if (res.success) {
           console.log("Registration successful")
-          navigate("/login")
+          navigate("/" + parentLocation + "/login")
           return
         } else {
           throw new Error("Registration failed")

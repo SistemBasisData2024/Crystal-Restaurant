@@ -35,7 +35,7 @@ export default function LoginPage() {
       .then((res) => {
         if (res.success) {
           console.log("Login successful")
-          navigate("/menu")
+          navigate("/" + parentLocation + "/profile")
           setUsername(formdata.username)
           return
         } else {
