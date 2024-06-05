@@ -1,6 +1,6 @@
 import logo from "../assets/logo.svg"
 import { userLogin } from "../actions/User.actions"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import { useAtom } from "jotai"
 
@@ -13,6 +13,15 @@ export default function LoginPage() {
   })
   const [isLoaded, setIsLoaded] = useState(false)
   const [_, setUsername] = useAtom(usernameAtom)
+  const [parentLocation, setParentLocation] = useState(
+    location.pathname.split("/")[1]
+  )
+
+  useEffect(() => {
+    if (parentLocation !== location.pathname) {
+      setParentLocation(location.pathname.split("/")[1])
+    }
+  }, [location.pathname])
 
   const navigate = useNavigate()
 
@@ -115,7 +124,7 @@ export default function LoginPage() {
               <p className='text-sm font-light text-newwhite'>
                 Don’t have an account yet?{" "}
                 <Link
-                  to='../register'
+                  to={"/" + parentLocation + "/register"}
                   className='font-medium text-prim-200 hover:underline'
                 >
                   Sign up

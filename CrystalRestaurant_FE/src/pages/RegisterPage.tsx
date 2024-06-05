@@ -1,6 +1,6 @@
 import logo from "../assets/logo.svg"
 import { userSignUp } from "../actions/User.actions"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Link, useNavigate } from "react-router-dom"
 
 export default function RegisterPage() {
@@ -10,6 +10,15 @@ export default function RegisterPage() {
   })
   const [confirmPassword, setConfirmPassword] = useState("")
   const [isLoaded, setIsLoaded] = useState(false)
+  const [parentLocation, setParentLocation] = useState(
+    location.pathname.split("/")[1]
+  )
+
+  useEffect(() => {
+    if (parentLocation !== location.pathname) {
+      setParentLocation(location.pathname.split("/")[1])
+    }
+  }, [location.pathname])
 
   const navigate = useNavigate()
 
@@ -128,7 +137,7 @@ export default function RegisterPage() {
               <p className='text-sm font-light text-newwhite'>
                 Don’t have an account yet?{" "}
                 <Link
-                  to='../login'
+                  to={"/" + parentLocation + "/login"}
                   className='font-medium text-prim-200 hover:underline'
                 >
                   {isLoaded ? "Loading..." : "Sign in"}

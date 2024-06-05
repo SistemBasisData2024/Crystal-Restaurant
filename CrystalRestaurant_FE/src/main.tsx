@@ -56,11 +56,23 @@ function App() {
               element={<OrderPage />}
             />
           ))}
+          {sessions.map((session) => (
+            <Route
+              key={session}
+              path={`/${session}/login`}
+              element={<LoginPage />}
+            />
+          ))}
+          {sessions.map((session) => (
+            <Route
+              key={session}
+              path={`/${session}/register`}
+              element={<RegisterPage />}
+            />
+          ))}
           <Route path='/' element={<h1>hellowold</h1>} />
           <Route path='*' element={<ErrorPage />} />
           {/* <Route path='/color-palette' element={<ColorPalette />} /> */}
-          <Route path='/login' element={<LoginPage />} />
-          <Route path='/register' element={<RegisterPage />} />
           <Route path='/profile' element={<ProfilePage />} />
           <Route path='/admin' element={<AdminPage />} />
         </Routes>
