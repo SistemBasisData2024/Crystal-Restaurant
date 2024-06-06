@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react"
 import ReactDOM from "react-dom/client"
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom"
 import "./index.css"
 
 import Navbar from "./components/Navbar.tsx"
@@ -72,9 +72,7 @@ function App() {
               element={<RegisterPage />}
             />
           ))}
-          <Route path='/' element={<button className="bg-black text-white p-4 rounded" onMouseDown={dineIn}>
-            Dine In
-          </button>} />
+          <Route path='/' element={<Navigate to="/login" />} />
           <Route path='*' element={<ErrorPage />} />
           {/* <Route path='/color-palette' element={<ColorPalette />} /> */}
           {sessions.map((session) => (

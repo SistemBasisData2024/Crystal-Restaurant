@@ -37,7 +37,8 @@ export default function RegisterPage() {
         console.log(res)
         if (res.success) {
           console.log("Registration successful")
-          navigate("/" + parentLocation + "/login")
+          // navigate("/" + parentLocation + "/login")
+          navigate("/login")
           return
         } else {
           throw new Error("Registration failed")
@@ -137,7 +138,8 @@ export default function RegisterPage() {
               <p className='text-sm font-light text-newwhite'>
                 Don’t have an account yet?{" "}
                 <Link
-                  to={"/" + parentLocation + "/login"}
+                  // to={"/" + parentLocation + "/login"}
+                  to='/login'
                   className='font-medium text-prim-200 hover:underline'
                 >
                   {isLoaded ? "Loading..." : "Sign in"}

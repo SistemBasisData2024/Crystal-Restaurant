@@ -25,17 +25,17 @@ export const dineIn = async () => {
 };
 
 export const getSession = async () => {
-    try {
-        const response = await axios.post(
-            `${import.meta.env.VITE_API_URL}/dine/getall`
-        );
-        // console.log("RESPONSE FROM BACKEND");
-        console.log(response.data);
-        return baseApiResponse(response.data, true);
+    // try {
+    //     const response = await axios.post(
+    //         `${import.meta.env.VITE_API_URL}/dine/getall`
+    //     );
+    //     // console.log("RESPONSE FROM BACKEND");
+    //     console.log(response.data);
+    //     return baseApiResponse(response.data, true);
 
-    } catch (error: any) {
-        //console.error(error);
-        return baseApiResponse(null, false);
-    }
-    // return baseApiResponse(["qwjbhkefhbjqwfebiqwuyaef", "session2"], true);
+    // } catch (error: any) {
+    //     //console.error(error);
+    //     return baseApiResponse(null, false);
+    // }
+    return baseApiResponse(["qwjbhkefhbjqwfebiqwuyaef", "session2"], true);
 }

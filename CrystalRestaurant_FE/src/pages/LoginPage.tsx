@@ -35,7 +35,8 @@ export default function LoginPage() {
       .then((res) => {
         if (res.success) {
           console.log("Login successful")
-          navigate("/" + parentLocation + "/profile")
+          // navigate("/" + parentLocation + "/profile")
+          navigate("/profile")
           setUsername(formdata.username)
           return
         } else {
@@ -124,7 +125,8 @@ export default function LoginPage() {
               <p className='text-sm font-light text-newwhite'>
                 Don’t have an account yet?{" "}
                 <Link
-                  to={"/" + parentLocation + "/register"}
+                  // to={"/" + parentLocation + "/register"}
+                  to="/register"
                   className='font-medium text-prim-200 hover:underline'
                 >
                   Sign up
