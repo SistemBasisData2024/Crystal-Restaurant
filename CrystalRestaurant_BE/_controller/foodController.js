@@ -1,5 +1,6 @@
 const pool = require('./_pool');
 
+//Controller untuk mendapatkan semua makanan dengan rute /food/getall, no param/body, return all food object
 getAllFood = async(req, res) =>{
     try{
         const result = await pool.query(
