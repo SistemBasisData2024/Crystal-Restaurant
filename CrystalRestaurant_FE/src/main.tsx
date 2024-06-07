@@ -8,13 +8,11 @@ import Navbar from "./components/Navbar.tsx"
 import MenuPage from "./pages/MenuPage/MenuPage.tsx"
 // import ColorPalette from "./pages/ColorPalette.tsx"
 import ErrorPage from "./pages/ErrorPage.tsx"
-import LoginPage from "./pages/LoginPage.tsx"
 import OrderPage from "./pages/OrderPage.tsx"
-import RegisterPage from "./pages/RegisterPage.tsx"
-import ProfilePage from "./pages/ProfilePage.tsx"
+import ProfilePage from "./pages/LoginRegister/ProfilePage.tsx"
 import AdminPage from "./pages/AdminPage.tsx"
 
-import { atom, Provider, useAtom } from "jotai"
+import { atom, Provider } from "jotai"
 import { dineIn, getSession } from "./actions/Dine.actions.ts"
 interface Order {
   id: number
@@ -58,7 +56,7 @@ function App() {
               element={<OrderPage />}
             />
           ))}
-          {sessions.map((session) => (
+          {/* {sessions.map((session) => (
             <Route
               key={session}
               path={`/${session}/login`}
@@ -71,17 +69,17 @@ function App() {
               path={`/${session}/register`}
               element={<RegisterPage />}
             />
-          ))}
+          ))} */}
           <Route path='/' element={<Navigate to="/login" />} />
           <Route path='*' element={<ErrorPage />} />
           {/* <Route path='/color-palette' element={<ColorPalette />} /> */}
           {sessions.map((session) => (
             <Route key={session} path={`/${session}/profile`} element={<ProfilePage />} />
           ))}
-          <Route path='/profile/*' element={<ProfilePage />} />
+          {/* <Route path='/profile/*' element={<ProfilePage />} /> */}
           <Route path='/admin' element={<AdminPage />} />
-          <Route path='/login/*' element={<LoginPage />} />
-          <Route path='/register/*' element={<RegisterPage />} />
+          {/* <Route path='/login/*' element={<LoginPage />} />
+          <Route path='/register/*' element={<RegisterPage />} /> */}
         </Routes>
       </Router>
     </React.StrictMode>
