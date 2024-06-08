@@ -1,65 +1,60 @@
-import { userSignUp } from "../../actions/User.actions"
-import { useState, useEffect } from "react"
+import { userSignUp } from "../../actions/User.actions";
+import { useState, useEffect } from "react";
 
 export default function RegisterBox(props: {
-  handleLogin: any
-  changeToLogin: any
+  handleLogin: any;
+  changeToLogin: any;
 }) {
   const [formdata, setFormData] = useState({
     username: "",
+    name: "",
+    email: "",
     password: "",
-  })
-  const [confirmPassword, setConfirmPassword] = useState("")
-  const [isLoaded, setIsLoaded] = useState(false)
+  });
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [isLoaded, setIsLoaded] = useState(false);
   const [parentLocation, setParentLocation] = useState(
     location.pathname.split("/")[1]
-  )
+  );
 
   useEffect(() => {
     if (parentLocation !== location.pathname) {
-      setParentLocation(location.pathname.split("/")[1])
+      setParentLocation(location.pathname.split("/")[1]);
     }
-  }, [location.pathname])
-
+  }, [location.pathname]);
 
   const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    setIsLoaded(true)
+    e.preventDefault();
+    setIsLoaded(true);
 
     if (formdata.password !== confirmPassword) {
-      alert("Passwords do not match")
-      return
+      alert("Passwords do not match");
+      setIsLoaded(false);
+      return;
     }
-    const response = userSignUp(formdata)
+    const response = userSignUp(formdata);
 
     response
       .then((res) => {
-        console.log(res)
+        console.log(res);
         if (res.success) {
-          console.log("Registration successful")
-          props.handleLogin()
-          return
+          console.log("Registration successful");
+          props.handleLogin();
+          return;
         } else {
-          throw new Error("Registration failed")
+          throw new Error("Registration failed");
         }
       })
       .catch(() => {
-        alert("Registration failed")
+        alert("Registration failed");
       })
       .finally(() => {
-        setIsLoaded(false)
-      })
-  }
+        setIsLoaded(false);
+      });
+  };
 
   return (
     <div className='mx-auto flex w-fit flex-col items-center justify-center px-6 py-8 md:min-w-[800px] lg:py-0'>
-      {/* <a
-        href='#'
-        className='mb-6 hidden items-center text-2xl font-semibold text-newwhite md:flex'
-      >
-        <img className='mr-2 h-8 w-8' src={logo} alt='logo' />
-        Crystal Restaurant
-      </a> */}
       <div className='w-full rounded-2xl border-2 border-secon-500 bg-bgsecon-100 duration-300 hover:border-prim-100 hover:shadow-xl hover:shadow-prim-500 sm:max-w-md md:mt-0 xl:p-0'>
         <div className='space-y-8 p-6 sm:p-8'>
           <h1 className='text-center text-xl font-bold leading-tight tracking-tight text-newwhite md:text-2xl'>
@@ -68,20 +63,60 @@ export default function RegisterBox(props: {
           <form className='space-y-4' onSubmit={submitHandler}>
             <div>
               <label
-                htmlFor='unsername'
+                htmlFor='username'
                 className='mb-2 block text-sm font-medium text-newwhite'
               >
-                Your unsername
+                Your username
               </label>
               <input
                 type='text'
-                name='unsername'
-                id='unsernameRegister'
+                name='username'
+                id='usernameRegister'
                 className=' block w-full rounded-lg border-2 border-secon-500 bg-bgsecon-100 p-2.5 text-newwhite placeholder-gray-500 shadow focus:border-prim-300 focus:ring-prim-300 sm:text-sm'
-                placeholder='username'
+                placeholder='Username'
                 value={formdata.username}
                 onChange={(e) => {
-                  setFormData({ ...formdata, username: e.target.value })
+                  setFormData({ ...formdata, username: e.target.value });
+                }}
+                required
+              />
+            </div>
+            <div>
+              <label
+                htmlFor='name'
+                className='mb-2 block text-sm font-medium text-newwhite'
+              >
+                Your name
+              </label>
+              <input
+                type='text'
+                name='name'
+                id='nameRegister'
+                className=' block w-full rounded-lg border-2 border-secon-500 bg-bgsecon-100 p-2.5 text-newwhite placeholder-gray-500 shadow focus:border-prim-300 focus:ring-prim-300 sm:text-sm'
+                placeholder='Name'
+                value={formdata.name}
+                onChange={(e) => {
+                  setFormData({ ...formdata, name: e.target.value });
+                }}
+                required
+              />
+            </div>
+            <div>
+              <label
+                htmlFor='email'
+                className='mb-2 block text-sm font-medium text-newwhite'
+              >
+                Your email
+              </label>
+              <input
+                type='email'
+                name='email'
+                id='emailRegister'
+                className=' block w-full rounded-lg border-2 border-secon-500 bg-bgsecon-100 p-2.5 text-newwhite placeholder-gray-500 shadow focus:border-prim-300 focus:ring-prim-300 sm:text-sm'
+                placeholder='Email'
+                value={formdata.email}
+                onChange={(e) => {
+                  setFormData({ ...formdata, email: e.target.value });
                 }}
                 required
               />
@@ -102,27 +137,27 @@ export default function RegisterBox(props: {
                 required
                 value={formdata.password}
                 onChange={(e) => {
-                  setFormData({ ...formdata, password: e.target.value })
+                  setFormData({ ...formdata, password: e.target.value });
                 }}
               />
             </div>
             <div>
               <label
-                htmlFor='password'
+                htmlFor='confirmPassword'
                 className='mb-2 block text-sm font-medium text-newwhite'
               >
                 Confirm Password
               </label>
               <input
                 type='password'
-                name='password'
-                id='password'
+                name='confirmPassword'
+                id='confirmPasswordRegister'
                 placeholder='••••••••'
                 className=' mb-4 block w-full rounded-lg border-2 border-secon-500 bg-bgsecon-100 p-2.5 text-newwhite placeholder-gray-500 shadow focus:border-prim-300 focus:ring-prim-300 sm:text-sm'
                 required
                 value={confirmPassword}
                 onChange={(e) => {
-                  setConfirmPassword(e.target.value)
+                  setConfirmPassword(e.target.value);
                 }}
               />
             </div>
@@ -146,5 +181,5 @@ export default function RegisterBox(props: {
         </div>
       </div>
     </div>
-  )
+  );
 }
