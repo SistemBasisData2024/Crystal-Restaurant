@@ -49,40 +49,53 @@ addBatch = async (req, res) => {
 };
 
 //rute : /batch/getPrice
-batchPrice = async (req, res) => {
+const batchPrice = async (req, res) => {
     const { session } = req.params;
+    const response = {
+        total: 0,
+        orders: []
+    };
+
     try {
-        let total = 0;
         const getBatch = await pool.query(
             `SELECT * FROM BATCH WHERE session = $1`,
             [session]
         );
 
         for (const order of getBatch.rows) {
-            let getPriceQuery, getPrice;
-            if (order.type == "food") {
-                const getPriceQuery = await pool.query(
+            let getPriceQuery, getPrice, getName;
+            if (order.type === "food") {
+                getPriceQuery = await pool.query(
                     `SELECT * FROM Food WHERE id = $1`,
                     [order.orderid]
                 );
                 getPrice = getPriceQuery.rows[0].price;
-            } else if (order.type == "combo") {
+                getName = getPriceQuery.rows[0].name;
+            } else if (order.type === "combo") {
                 const getComboPrice = await pool.query(
-                    `SELECT price FROM Combo WHERE id = $1`,
+                    `SELECT price, name FROM Combo WHERE id = $1`,
                     [order.orderid]
                 );
                 getPrice = getComboPrice.rows[0].price;
+                getName = getComboPrice.rows[0].name;
             }
-            total += getPrice * order.qty;
+            
+            response.orders.push({
+                foodName: getName,
+                foodPrice: getPrice,
+                quantity: order.qty,
+            });
+            response.total += getPrice * order.qty;
         }
 
-        res.status(200).json(total);
+        res.status(200).json(response);
 
     } catch (err) {
         console.error(err);
-        res.status(500).json("false");
+        res.status(500).json({ success: false, error: "Failed to calculate batch price" });
     }
 }
+
 
 module.exports = {
     addBatch,

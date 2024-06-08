@@ -12,6 +12,7 @@ import AdminPage from "./pages/AdminPage.tsx"
 
 import { atom, Provider } from "jotai"
 import { getSession } from "./actions/Dine.actions.ts"
+import PayPage from "./pages/PayPage.tsx"
 import InputSessionPage from "./pages/InputSessionPage.tsx"
 interface Order {
   id: number
@@ -55,6 +56,27 @@ function App() {
               element={<OrderPage />}
             />
           ))}
+          {sessions.map((session) => (
+            <Route
+              key={session}
+              path={`/${session}/payment`}
+              element={<PayPage />}
+            />
+          ))}
+          {/* {sessions.map((session) => (
+            <Route
+              key={session}
+              path={`/${session}/login`}
+              element={<LoginPage />}
+            />
+          ))}
+          {sessions.map((session) => (
+            <Route
+              key={session}
+              path={`/${session}/register`}
+              element={<RegisterPage />}
+            />
+          ))} */}
           <Route path='/' element={<InputSessionPage />} />
           <Route path='*' element={<ErrorPage />} />
           <Route path='/admin' element={<AdminPage />} />
