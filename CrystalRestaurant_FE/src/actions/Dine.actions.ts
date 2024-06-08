@@ -11,7 +11,7 @@ const baseApiResponse = (data: any, isSuccess: boolean) => {
 
 export const dineIn = async () => {
   try {
-    const response = await axios.post(
+    const response = await axios.get(
       `${import.meta.env.VITE_API_URL}/dine/create`
     )
     console.log("RESPONSE FROM BACKEND")
