@@ -8,11 +8,12 @@ function md5Hash(text) {
 signUp = async(req, res) =>{
     const{name, username, email, password} = req.body;
     const isAdmin = false;
+    const poin = 0
     try{
         const result = await pool.query(
-            `INSERT INTO Users (name, username, email, password, isAdmin)
-            VALUES($1, $2, $3, $4, $5) RETURNING *`,
-            [name, username, email, md5Hash(password), isAdmin]
+            `INSERT INTO Users (name, username, email, password, poin, isAdmin)
+            VALUES($1, $2, $3, $4, $5, $6) RETURNING *`,
+            [name, username, email, md5Hash(password), poin, isAdmin]
         );
         res.status(200).json(result.rows[0]);
     }catch(err){
