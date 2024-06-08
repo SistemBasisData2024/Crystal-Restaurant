@@ -1,5 +1,4 @@
 import FoodCards from "./FoodCards"
-import Topaz from "../../../assets/maxresdefault.jpg"
 import { getAllFood } from "../../../actions/Food.actions"
 import { useEffect, useState } from "react";
 
