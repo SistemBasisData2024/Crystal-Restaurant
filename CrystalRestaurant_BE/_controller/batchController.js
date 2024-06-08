@@ -76,7 +76,7 @@ batchPrice = async (req, res) => {
             total += getPrice * order.qty;
         }
 
-        res.status(200).json(total);
+        res.status(200).json({batch: getBatch.rows, totals: total});
 
     } catch (err) {
         console.error(err);
