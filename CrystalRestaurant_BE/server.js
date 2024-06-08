@@ -14,7 +14,7 @@ app.use(cors());
 async function incrementIsExp() {    
     try {
       const result = await pool.query(`UPDATE Dine_in SET isExp = isExp + 1 RETURNING *`);
-      const deleted = await pool.query(`DELETE FROM Dine_in WHERE isExp = 5 RETURNING *`);
+      const deleted = await pool.query(`DELETE FROM Dine_in WHERE isExp >= 60 RETURNING *`);
       console.log("1 Minute pass by");
       console.log("session yang dihapus:\n" + deleted.rows);
     } catch (err) {

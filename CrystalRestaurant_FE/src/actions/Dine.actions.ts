@@ -25,17 +25,18 @@ export const dineIn = async () => {
 };
 
 export const getSession = async () => {
-    // try {
-    //     const response = await axios.post(
-    //         `${import.meta.env.VITE_API_URL}/dine/getall`
-    //     );
-    //     // console.log("RESPONSE FROM BACKEND");
-    //     console.log(response.data);
-    //     return baseApiResponse(response.data, true);
+    try {
+        const response = await axios.get(
+            `${import.meta.env.VITE_API_URL}/dine/getall`
+        );
+        console.log("RESPONSE FROM BACKEND");
+        console.log(response.data);
+        //return baseApiResponse(["qwjbhkefhbjqwfebiqwuyaef", "ad7a28e74acc141b498d1c53768f5b6c"], true);
+        const sessions = Array.isArray(response.data) ? response.data.map(item => item.session) : response.data;
+        return baseApiResponse(sessions, true);
 
-    // } catch (error: any) {
-    //     //console.error(error);
-    //     return baseApiResponse(null, false);
-    // }
-    return baseApiResponse(["qwjbhkefhbjqwfebiqwuyaef", "session2"], true);
+    } catch (error: any) {
+        console.error(error);
+        return baseApiResponse(null, false);
+    }
 }
