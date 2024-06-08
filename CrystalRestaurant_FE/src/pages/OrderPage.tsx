@@ -29,6 +29,7 @@ export default function OrderPage() {
       })
       .catch((err) => {
         console.error(err)
+        alert("Failed to order")
       })
       .finally(() => {
         setIsLoading(false)
