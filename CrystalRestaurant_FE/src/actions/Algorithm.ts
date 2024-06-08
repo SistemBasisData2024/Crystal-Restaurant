@@ -1,5 +1,5 @@
 /**
- * 
+ *
  * @param price //price to be converted to IDR
  * @returns converted string //returns the converted price
  */

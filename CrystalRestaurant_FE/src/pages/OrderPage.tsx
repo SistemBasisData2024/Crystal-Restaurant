@@ -5,16 +5,34 @@ import { useAtom } from "jotai"
 import { orderAtom } from "../main"
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
+import { createBatch } from "../actions/Batch.actions"
 
 export default function OrderPage() {
   const [orderState, setOrderState] = useAtom(orderAtom)
   const [orderSuccess, setOrderSuccess] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
   const navigate = useNavigate()
 
   const handleOrder = () => {
-    console.table(orderState)
     console.log(orderState)
-    setOrderSuccess(true)
+
+    setIsLoading(true)
+
+    createBatch(orderState, location.pathname.split("/")[1])
+      .then((data) => {
+        if (data.success) {
+          console.log(data)
+          setOrderSuccess(true)
+        } else {
+          throw new Error("Failed to create batch")
+        }
+      })
+      .catch((err) => {
+        console.error(err)
+      })
+      .finally(() => {
+        setIsLoading(false)
+      })
   }
 
   const [parentLocation, setParentLocation] = useState(
@@ -44,7 +62,7 @@ export default function OrderPage() {
             className='m-4 my-12 rounded-lg bg-prim-100 px-4 py-2 font-bold text-newwhite shadow-lg'
             onMouseDown={handleOrder}
           >
-            Order
+            {isLoading ? "Ordering..." : "Order"}
           </button>
         </div>
       </section>

@@ -1,7 +1,7 @@
 // import axios from 'axios'; // (semestara belum api call)
 
 export const addMenu = (
-  menuId: number, 
+  menuId: number,
   menuTitle: string,
   count: number,
   price: number,
@@ -16,7 +16,7 @@ export const addMenu = (
     id: menuId,
     title: menuTitle,
     quantity: count,
-    price: price
+    price: price,
   })
   setOrderState(newOrderState)
 
@@ -24,7 +24,7 @@ export const addMenu = (
 }
 
 export const removeMenu = (
-  menuId: string, 
+  menuId: string,
   orderState: any,
   setOrderState: any
 ) => {
@@ -33,18 +33,12 @@ export const removeMenu = (
   setOrderState(newOrderState)
 }
 
-export const clearMenu = (
-  setOrderState: any
-) => {
+export const clearMenu = (setOrderState: any) => {
   setOrderState({})
 }
 
-
 //TODO: hubungin ke API
-export const orderMenu = (
-  orderState: any,
-  setOrderState: any
-) => {
+export const orderMenu = (orderState: any, setOrderState: any) => {
   console.log(orderState)
   clearMenu(setOrderState)
 }

@@ -63,20 +63,6 @@ function App() {
               element={<PayPage />}
             />
           ))}
-          {/* {sessions.map((session) => (
-            <Route
-              key={session}
-              path={`/${session}/login`}
-              element={<LoginPage />}
-            />
-          ))}
-          {sessions.map((session) => (
-            <Route
-              key={session}
-              path={`/${session}/register`}
-              element={<RegisterPage />}
-            />
-          ))} */}
           <Route path='/' element={<InputSessionPage />} />
           <Route path='*' element={<ErrorPage />} />
           <Route path='/admin' element={<AdminPage />} />
