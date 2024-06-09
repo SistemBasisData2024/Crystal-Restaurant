@@ -4,5 +4,6 @@ const dineRouter = express.Router();
 
 dineRouter.get("/create", dineController.createSession);
 dineRouter.get("/getall", dineController.getAllSession);
+dineRouter.delete("/delete/:session", dineController.deleteSession);
 
 module.exports = dineRouter;
