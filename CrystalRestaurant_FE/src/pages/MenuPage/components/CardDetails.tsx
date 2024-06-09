@@ -1,22 +1,21 @@
-import { useState } from "react"
-import { addMenu } from "../../../actions/Menu.action"
-
-import { useAtom } from "jotai"
-import { orderAtom } from "../../../main"
+import { useState } from "react";
+import { addMenu } from "../../../actions/Menu.action";
+import { useAtom } from "jotai";
+import { orderAtom } from "../../../main";
 
 export default function Description(props: {
-  title: string
-  description: string
-  image: string
-  price: number
-  mykey: number
-  clicked: boolean
-  setCLicked: (clicked: boolean) => void
-  priceToIDR: (price: number) => string
+  title: string;
+  description: string;
+  image: string;
+  price: number;
+  mykey: number;
+  clicked: boolean;
+  setClicked: (clicked: boolean) => void; // Corrected prop name
+  priceToIDR: (price: number) => string;
 }) {
-  const [isLoaded, setIsLoaded] = useState(false)
+  const [isLoaded, setIsLoaded] = useState(false);
 
-  const [orderState, setOrderState] = useAtom(orderAtom)
+  const [orderState, setOrderState] = useAtom(orderAtom);
 
   return (
     <section className='absolute left-0 top-0 z-10 h-screen w-screen text-[1rem]'>
@@ -35,10 +34,10 @@ export default function Description(props: {
             <h1
               className='size-[1em] cursor-pointer'
               onClick={() => {
-                setIsLoaded(false)
+                setIsLoaded(false);
                 setTimeout(() => {
-                  props.setCLicked(true)
-                }, 200)
+                  props.setClicked(true); // Corrected prop name
+                }, 200);
               }}
             >
               X
@@ -55,18 +54,24 @@ export default function Description(props: {
           <p className='line-clamp-3 text-[0.875em] font-normal text-newwhite'>
             {props.description}
           </p>
-          <div className='mt-[2em] inline-flex cursor-pointer items-center rounded-[0.5em] border-[0.125em] border-prim-100 bg-newwhite px-[0.5em] py-[0.5em] text-center text-[0.875em] font-medium text-prim-100 transition-colors duration-200 ease-out hover:bg-prim-100 hover:text-newwhite focus:outline-none focus:ring-2 focus:ring-prim-400' onClick={() => addMenu(
-            props.mykey,
-            props.title,
-            1,
-            props.price,
-            orderState,
-            setOrderState
-          )}>
+          <div
+            className='mt-[2em] inline-flex cursor-pointer items-center rounded-[0.5em] border-[0.125em] border-prim-100 bg-newwhite px-[0.5em] py-[0.5em] text-center text-[0.875em] font-medium text-prim-100 transition-colors duration-200 ease-out hover:bg-prim-100 hover:text-newwhite focus:outline-none focus:ring-2 focus:ring-prim-400'
+            onClick={() =>
+              addMenu(
+                props.mykey,
+                props.title,
+                1,
+                props.price,
+                orderState,
+                setOrderState,
+                true
+              )
+            }
+          >
             Add to cart
           </div>
         </div>
       </div>
     </section>
-  )
+  );
 }

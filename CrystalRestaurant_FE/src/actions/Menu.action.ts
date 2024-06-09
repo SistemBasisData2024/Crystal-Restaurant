@@ -5,9 +5,9 @@ export const addMenu = (
   menuTitle: string,
   count: number,
   price: number,
-
   orderState: any,
-  setOrderState: any
+  setOrderState: any,
+  isCombo: boolean
 ) => {
   const newOrderState = [...orderState]
 
@@ -17,11 +17,13 @@ export const addMenu = (
     title: menuTitle,
     quantity: count,
     price: price,
+    isCombo: isCombo, // Add isCombo to the order item
   })
   setOrderState(newOrderState)
-
   console.table(newOrderState) // Debugging
+  console.log(newOrderState)
 }
+
 
 export const removeMenu = (
   menuId: string,

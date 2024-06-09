@@ -19,15 +19,21 @@ export const createBatch = async (orderState: any, session: string) => {
   // convert to json
   const data = {
     batch: orderState.map((order: any) => {
+      console.log(order);
+      let foodType
+      if(order.isCombo){
+        foodType = "combo"
+      }else{
+        foodType = "food";
+      }
       return {
         session: session,
         orderid: order.id,
-        type: "food",
+        type: foodType,
         qty: order.quantity,
       }
     }),
   }
-
   try {
     const response = await axios.post(
       `${import.meta.env.VITE_API_URL}/batch/addBatch`,

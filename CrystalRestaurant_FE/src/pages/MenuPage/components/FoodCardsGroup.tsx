@@ -1,7 +1,9 @@
-import FoodCards from "./FoodCards"
-import { getAllFood } from "../../../actions/Food.actions"
+import FoodCards from "./FoodCards";
+import { getAllFood } from "../../../actions/Food.actions";
 import { useEffect, useState } from "react";
-
+import { getAllCombo
+  
+ } from "../../../actions/Food.actions";
 interface FoodItem {
   id: number;
   name: string;
@@ -10,77 +12,74 @@ interface FoodItem {
   imageurl: string;
 }
 
+interface ComboItem {
+  combo_id: number;
+  combo_name: string;
+  combo_description: string;
+  combo_price: number;
+  combo_image_url: string;
+  food_names: string[];
+}
+
 export default function FoodCardsGroup() {
-  const [foods, setFood] = useState<FoodItem[]>([]);;
+  const [foods, setFoods] = useState<FoodItem[]>([]);
+  const [combos, setCombos] = useState<ComboItem[]>([]);
 
-  const getFood = async () => {
-    const apiResponse = await getAllFood();
-    if (apiResponse.success) {
-      console.log("Response In MainPage.jsx");
-      console.log(apiResponse.data);
+  const getFoodAndCombo = async () => {
+    const foodResponse = await getAllFood();
+    const comboResponse = await getAllCombo();
 
-      setFood(apiResponse.data);
+    if (foodResponse.success && comboResponse.success) {
+      setFoods(foodResponse.data);
+      setCombos(comboResponse.data);
     } else {
-      alert("Failed to fetch food items");
+      alert("Failed to fetch food items or combos");
     }
   };
 
   useEffect(() => {
-    getFood();
+    getFoodAndCombo();
   }, []);
 
-  const data = foods.map((food, index) => ({
-    key : index,
-    mykey : index,
+  const foodData = foods.map((food, index) => ({
+    key: `food-${index}`,
     id: food.id,
     title: food.name,
     price: food.price,
     image: food.imageurl,
     description: food.description,
+    isCombo: false, // explicitly set isCombo to false for food items
+    foodNames: [],
   }));
 
-  // [
-  //   {
-  //     id: 1,
-  //     title: "tes 1 asdas das daf sd asgasfgd asdfasdfas dfasd fas df",
-  //     price: 100000,
-  //     image: Topaz,
-  //     description:
-  //       "Here are the biggest enterprise technology acquisitions of 2021 so far, in reverse chronological order.",
-  //   },
-  //   {
-  //     id: 1,
-  //     title: "Tes 2",
-  //     price: 10000,
-  //     image:
-  //       "https://drive.google.com/file/d/1DWpGAyj-Kt60OsYgHNR5BQipce3PChvc/preview",
-  //     description:
-  //       "Here are the biggest enterprise technology acquisitions of 2021 so far, in reverse chronological order.",
-  //   },
-  //   {
-  //     id: 1,
-  //     title: "Tes 3",
-  //     price: 10000,
-  //     image:
-  //       "https://drive.google.com/file/d/1DWpGAyj-Kt60OsYgHNR5BQipce3PChvc/preview",
-  //     description:
-  //       "Here are the biggest enterprise technology acquisitions of 2021 so far, in reverse chronological order.",
-  //   },
-  // ]
+  const comboData = combos.map((combo, index) => ({
+    key: `combo-${index}`,
+    id: combo.combo_id,
+    title: combo.combo_name,
+    price: combo.combo_price,
+    image: combo.combo_image_url,
+    description: combo.combo_description,
+    isCombo: true,
+    foodNames: combo.food_names,
+  }));
+
+  const combinedData = [...foodData, ...comboData];
 
   return (
     <div className='flex flex-wrap justify-center gap-2 md:gap-4'>
-      {data.map((item, index) => (
+      {combinedData.map((item, index) => (
         <FoodCards
+          key={item.key}
           id={item.id}
-          mykey={index}
-          key={index}
           title={item.title}
           price={item.price}
           image={item.image}
           description={item.description}
+          isCombo={item.isCombo}
+          foodNames={item.foodNames}
+          mykey={index}
         />
       ))}
     </div>
-  )
+  );
 }

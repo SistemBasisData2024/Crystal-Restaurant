@@ -3,7 +3,7 @@ import { useState, useEffect } from "react"
 
 import { getAllFood } from "../actions/Food.actions"
 import { addMenu } from "../actions/Menu.action"
-import { dineIn } from "../actions/Dine.actions"
+import { dineIn, getSession } from "../actions/Dine.actions"
 
 interface FoodItem {
   id: number
@@ -23,7 +23,7 @@ export default function AdminPage() {
   })
   const [isLoaded, setIsLoaded] = useState(false)
   const [popupAddMenu, setPopupAddMenu] = useState(false)
-  const [newSession, setNewSession] = useState("")
+  const [sessions, setSessions] = useState<string[]>([])
 
   const submitHandler = (e: any) => {
     e.preventDefault()
@@ -54,14 +54,31 @@ export default function AdminPage() {
       .catch((err) => {
         console.error(err)
       })
+
+    fetchSessions()
   }, [])
 
-  const handdleSession = () => {
+  const fetchSessions = () => {
+    getSession()
+      .then((data) => {
+        if (data.success) {
+          setSessions(data.data)
+        } else {
+          throw new Error("Failed to fetch sessions")
+        }
+      })
+      .catch((err) => {
+        console.error(err)
+        alert("Failed to fetch sessions")
+      })
+  }
+
+  const handleCreateSession = () => {
     dineIn()
       .then((data) => {
         if (data.success) {
           alert("New session created")
-          setNewSession(data.data.session)
+          fetchSessions()
         } else {
           throw new Error("Failed to create new session")
         }
@@ -79,20 +96,24 @@ export default function AdminPage() {
       </h1>
       <div className='flex w-screen justify-center'>
         <button
-          onClick={handdleSession}
+          onClick={handleCreateSession}
           className='hover:bg-prim-600 mt-4 rounded-lg bg-secon-500 px-4 py-2.5 text-sm font-medium text-white duration-300 hover:shadow-xl hover:shadow-secon-500 sm:px-6 sm:py-3'
         >
           Create New Session
         </button>
-        {/* {session ? (
-          <p className='mt-4 text-lg font-semibold text-newwhite'>
-            Session: {session}
-          </p>
-        ) : null} */}
       </div>
-      <p className='mt-4 text-lg font-semibold text-newwhite'>
-        Session: {newSession || '-'}
-      </p>
+      <div className='mt-4'>
+        <h2 className='text-lg font-semibold text-newwhite'>Active Sessions:</h2>
+        <ul className='mt-2'>
+          {sessions.length > 0 ? (
+            sessions.map((session) => (
+              <li key={session} className='text-newwhite'>{session}</li>
+            ))
+          ) : (
+            <p className='text-newwhite'>No active sessions.</p>
+          )}
+        </ul>
+      </div>
       <div className='w-screen px-2'>
         <TableAdmin menuState={foodState} setMenuState={setFoodState} />
       </div>
