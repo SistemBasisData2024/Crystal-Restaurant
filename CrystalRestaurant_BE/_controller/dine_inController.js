@@ -13,6 +13,7 @@ createSession = async(req, res) => {
     const hashedSession = md5Hash(Datenow + indonesiaTime);
 
     const qr_code = "http://localhost:5173/" + hashedSession;
+    console.log(qr_code)
     try{
         const result = await pool.query(
             `INSERT INTO Dine_in(qr_code, dine_time, isExp, session)

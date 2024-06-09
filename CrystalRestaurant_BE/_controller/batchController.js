@@ -3,6 +3,7 @@ const pool = require("./_pool");
 //rute : /batch/addBatch
 addBatch = async (req, res) => {
     const batch = req.body.batch;
+    console.log(batch);
     if (!batch || !Array.isArray(batch)) {
         return res.status(400).send('Invalid input: batch must be an array of objects');
     }
