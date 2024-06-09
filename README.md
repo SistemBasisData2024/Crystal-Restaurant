@@ -30,6 +30,9 @@ App Version : 1.0.0
 
 ## Frontend
 
+### Landing Page
+![image](https://github.com/SistemBasisData2024/Crystal-Restaurant/assets/134668057/4590fcb2-492c-40ca-9454-e4b58639944f)
+
 ### Signin Page
 
 ![image](https://github.com/SistemBasisData2024/Crystal-Restaurant/assets/60654087/42076db9-df5b-4638-a4d9-23d3975969ac)
