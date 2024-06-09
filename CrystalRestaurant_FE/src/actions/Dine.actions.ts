@@ -40,3 +40,7 @@ export const getSession = async () => {
     return baseApiResponse(null, false)
   }
 }
+
+export const deleteSession = async (sessionId: string) => {
+  return baseApiResponse(sessionId, true)
+}

@@ -14,6 +14,7 @@ import { atom, Provider } from "jotai"
 import { getSession } from "./actions/Dine.actions.ts"
 import PayPage from "./pages/PayPage.tsx"
 import InputSessionPage from "./pages/InputSessionPage.tsx"
+import SessionHomePage from "./pages/SessionHomePage.tsx"
 interface Order {
   id: number
   title: string
@@ -61,6 +62,13 @@ function App() {
               key={session}
               path={`/${session}/payment`}
               element={<PayPage />}
+            />
+          ))}
+          {sessions.map((session) => (
+            <Route
+              key={session}
+              path={`/${session}`}
+              element={<SessionHomePage sessionName={session} />}
             />
           ))}
           <Route path='/' element={<InputSessionPage />} />

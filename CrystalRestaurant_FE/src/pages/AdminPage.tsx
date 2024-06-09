@@ -3,7 +3,11 @@ import { useState, useEffect } from "react"
 
 import { getAllFood } from "../actions/Food.actions"
 import { addMenu } from "../actions/Menu.action"
-import { dineIn, getSession } from "../actions/Dine.actions"
+import { deleteSession, dineIn, getSession } from "../actions/Dine.actions"
+import { Link } from "react-router-dom"
+import QRCode from "react-qr-code"
+
+const URL = "http://localhost:5173"
 
 interface FoodItem {
   id: number
@@ -23,7 +27,9 @@ export default function AdminPage() {
   })
   const [isLoaded, setIsLoaded] = useState(false)
   const [popupAddMenu, setPopupAddMenu] = useState(false)
+  const [popupSessionName, setPopupSessionName] = useState("")
   const [sessions, setSessions] = useState<string[]>([])
+  const [isCombo, setIsCombo] = useState(false)
 
   const submitHandler = (e: any) => {
     e.preventDefault()
@@ -34,9 +40,11 @@ export default function AdminPage() {
       formdata.count,
       formdata.price,
       foodState,
-      setFoodState
+      setFoodState,
+      isCombo
     )
     setIsLoaded(false)
+    setPopupAddMenu(false)
   }
 
   useEffect(() => {
@@ -89,6 +97,23 @@ export default function AdminPage() {
       })
   }
 
+  const handleDeleteSession = (sessionName: string) => () => {
+    deleteSession(sessionName)
+      .then((data) => {
+        if (data.success) {
+          alert("Session deleted")
+          fetchSessions()
+          setPopupSessionName("")
+        } else {
+          throw new Error("Failed to delete session")
+        }
+      })
+      .catch((err) => {
+        console.error(err)
+        alert("Failed to delete session")
+      })
+  }
+
   return (
     <section className='absolute left-0 top-0 -z-10 flex h-screen w-screen flex-col items-center justify-start bg-bgdull-200 pt-32 text-newwhite'>
       <h1 className=' text-center text-4xl font-bold leading-tight tracking-tight text-newwhite md:text-4xl'>
@@ -96,18 +121,26 @@ export default function AdminPage() {
       </h1>
       <div className='flex w-screen justify-center'>
         <button
-          onClick={handleCreateSession}
+          onMouseDown={handleCreateSession}
           className='hover:bg-prim-600 mt-4 rounded-lg bg-secon-500 px-4 py-2.5 text-sm font-medium text-white duration-300 hover:shadow-xl hover:shadow-secon-500 sm:px-6 sm:py-3'
         >
           Create New Session
         </button>
       </div>
       <div className='mt-4'>
-        <h2 className='text-lg font-semibold text-newwhite'>Active Sessions:</h2>
+        <h2 className='text-lg font-semibold text-newwhite'>
+          Active Sessions:
+        </h2>
         <ul className='mt-2'>
           {sessions.length > 0 ? (
             sessions.map((session) => (
-              <li key={session} className='text-newwhite'>{session}</li>
+              <li
+                key={session}
+                className='cursor-pointer text-newwhite underline'
+                onMouseDown={() => setPopupSessionName(session)}
+              >
+                {session}
+              </li>
             ))
           ) : (
             <p className='text-newwhite'>No active sessions.</p>
@@ -120,7 +153,7 @@ export default function AdminPage() {
 
       <div className='flex w-screen justify-center'>
         <button
-          onClick={() => setPopupAddMenu(!popupAddMenu)}
+          onMouseDown={() => setPopupAddMenu(!popupAddMenu)}
           className='hover:bg-prim-600 mt-4 rounded-lg bg-prim-500 px-4 py-2.5 font-medium text-white duration-300 hover:shadow-xl hover:shadow-prim-500 sm:px-6 sm:py-3'
         >
           Add Menu
@@ -131,7 +164,7 @@ export default function AdminPage() {
         <section className='absolute left-0 top-0 flex h-screen w-screen items-center justify-center  backdrop-blur-lg '>
           <div className='relative w-full rounded-2xl border-2 border-secon-500 bg-bgsecon-100 duration-300 hover:border-prim-100 hover:shadow-xl hover:shadow-prim-500 sm:max-w-md md:mt-0 xl:p-0'>
             <button
-              onClick={() => setPopupAddMenu(!popupAddMenu)}
+              onMouseDown={() => setPopupAddMenu(!popupAddMenu)}
               className='absolute right-4 top-2 text-3xl text-newwhite'
             >
               &times;
@@ -183,6 +216,20 @@ export default function AdminPage() {
                     }}
                     required
                   />
+                  <div className='mt-2 flex items-center'>
+                    <input
+                      type='checkbox'
+                      id='isCombo'
+                      name='isCombo'
+                      onChange={(e) => setIsCombo(e.target.checked)}
+                    />
+                    <label
+                      htmlFor='isCombo'
+                      className='ml-2 text-sm font-medium text-newwhite'
+                    >
+                      Combo
+                    </label>
+                  </div>
                   <div className='flex justify-center'>
                     <button
                       type='submit'
@@ -193,6 +240,53 @@ export default function AdminPage() {
                   </div>
                 </div>
               </form>
+            </div>
+          </div>
+        </section>
+      )}
+
+      {popupSessionName && (
+        <section className='absolute left-0 top-0 flex h-screen w-screen items-center justify-center  backdrop-blur-lg '>
+          <div className='relative w-full rounded-2xl border-2 border-secon-500 bg-bgsecon-100 duration-300 hover:border-prim-100 hover:shadow-xl hover:shadow-prim-500 sm:max-w-md md:mt-0 xl:p-0'>
+            <button
+              onMouseDown={() => setPopupSessionName("")}
+              className='absolute right-4 top-2 text-3xl text-newwhite'
+            >
+              &times;
+            </button>
+            <div className='space-y-8 p-6 sm:p-8'>
+              <h1 className='text-center text-xl font-bold leading-tight tracking-tight text-newwhite md:text-2xl'>
+                Session link:
+              </h1>
+              <p className='text-center text-lg font-normal text-newwhite underline'>
+                <Link to={`/${popupSessionName}`}>
+                  {URL}/session/{popupSessionName}
+                </Link>
+              </p>
+              <div className='flex justify-between '>
+                <button
+                  className='hover:bg-prim-600 mt-4 rounded-lg bg-prim-500 px-4 py-2.5 font-medium text-white duration-300 hover:shadow-xl hover:shadow-prim-500 sm:px-6 sm:py-3'
+                  onMouseDown={() =>
+                    navigator.clipboard.writeText(
+                      `${URL}/session/${popupSessionName}`
+                    )
+                  }
+                >
+                  Copy Link
+                </button>
+                <button
+                  className='hover:bg-prim-600 mt-4 rounded-lg bg-prim-500 px-4 py-2.5 font-medium text-white duration-300 hover:shadow-xl hover:shadow-prim-500 sm:px-6 sm:py-3'
+                  onMouseDown={handleDeleteSession(popupSessionName)}
+                >
+                  Delete
+                </button>
+              </div>
+              <div className='flex flex-col items-center'>
+                <h1 className='text-center text-xl font-bold leading-tight tracking-tight text-newwhite md:text-2xl'>
+                  QR Code:
+                </h1>
+                <QRCode value={`${URL}/session/${popupSessionName}`} />
+              </div>
             </div>
           </div>
         </section>
