@@ -649,8 +649,21 @@
 				{
 					"name": "deleteFood",
 					"request": {
-						"method": "GET",
-						"header": []
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:4005/food/deleteFood/9",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4005",
+							"path": [
+								"food",
+								"deleteFood",
+								"9"
+							]
+						}
 					},
 					"response": [
 						{
