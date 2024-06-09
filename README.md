@@ -18,7 +18,6 @@ Backend menggunakan NeonDB sebagai cloud Database, dengan Express js sebagai han
 - Axios : 1.6.8
 - Vite : 5.2.0
 - Tailwind CSS : 3.4.3
-- 
 
 App Version : 1.0.0
 
