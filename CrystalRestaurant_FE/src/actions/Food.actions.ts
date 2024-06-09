@@ -42,3 +42,18 @@ export const getAllCombo = async () => {
     return baseApiResponse(null, false)
   }
 }
+
+export const makeFood = async (formData: any) => {
+  try {
+    const response = await axios.post(
+      `${import.meta.env.VITE_API_URL}/food/makeFood`,
+      formData
+    )
+    console.log("RESPONSE FROM BACKEND")
+    console.log(response.data)
+    return baseApiResponse(response.data, true)
+  } catch (error: any) {
+    console.error(error)
+    return baseApiResponse(null, false)
+  }
+}

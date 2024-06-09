@@ -8,6 +8,7 @@ import { Link } from "react-router-dom"
 import QRCode from "react-qr-code"
 
 const URL = "http://localhost:5173"
+import { makeFood } from "../actions/Food.actions"
 
 interface FoodItem {
   id: number
@@ -20,10 +21,10 @@ interface FoodItem {
 export default function AdminPage() {
   const [foodState, setFoodState] = useState<FoodItem[]>([])
   const [formdata, setFormData] = useState({
-    menuId: 8,
-    menuTitle: "",
-    count: 1,
+    name: "",
     price: 0,
+    description : "",
+    imageurl : ""
   })
   const [isLoaded, setIsLoaded] = useState(false)
   const [popupAddMenu, setPopupAddMenu] = useState(false)
@@ -31,22 +32,36 @@ export default function AdminPage() {
   const [sessions, setSessions] = useState<string[]>([])
   const [isCombo, setIsCombo] = useState(false)
 
-  const submitHandler = (e: any) => {
-    e.preventDefault()
-    setIsLoaded(true)
-    addMenu(
-      formdata.menuId,
-      formdata.menuTitle,
-      formdata.count,
-      formdata.price,
-      foodState,
-      setFoodState,
-      isCombo
-    )
-    setIsLoaded(false)
-    setPopupAddMenu(false)
-  }
 
+  const submitHandler = async (e: any) => {
+    e.preventDefault();
+  
+    try {
+      setIsLoaded(true);
+      
+      const formData = {
+        name: formdata.name,
+        description: formdata.description,
+        price: formdata.price,
+        imageurl: formdata.imageurl
+      };
+  
+      const response = await makeFood(formData);
+  
+      if (response.success) {
+        // Handle success
+        console.log("Food successfully created:", response.data);
+      } else {
+        // Handle failure
+        console.error("Failed to create food:", response.success);
+      }
+    } catch (error) {
+      console.error("An error occurred:", error);
+    } finally {
+      setIsLoaded(false);
+    }
+  };
+  
   useEffect(() => {
     getAllFood()
       .then((data) => {
@@ -187,9 +202,49 @@ export default function AdminPage() {
                     id='menuTitleLogin'
                     className=' block w-full rounded-lg border-2 border-secon-500 bg-bgsecon-100 p-2.5 text-newwhite placeholder-gray-500 shadow focus:border-prim-300 focus:ring-prim-300 sm:text-sm'
                     placeholder='menuTitle'
-                    value={formdata.menuTitle}
+                    value={formdata.name}
                     onChange={(e) => {
-                      setFormData({ ...formdata, menuTitle: e.target.value })
+                      setFormData({ ...formdata, name: e.target.value })
+                    }}
+                    required
+                  />
+                </div>
+                <div>
+                  <label
+                    htmlFor='menuTitle'
+                    className='mb-2 block text-sm font-medium text-newwhite'
+                  >
+                    description
+                  </label>
+                  <input
+                    type='text'
+                    name='description'
+                    id='description'
+                    className=' block w-full rounded-lg border-2 border-secon-500 bg-bgsecon-100 p-2.5 text-newwhite placeholder-gray-500 shadow focus:border-prim-300 focus:ring-prim-300 sm:text-sm'
+                    placeholder='description'
+                    value={formdata.description}
+                    onChange={(e) => {
+                      setFormData({ ...formdata, description: e.target.value })
+                    }}
+                    required
+                  />
+                </div>
+                <div>
+                  <label
+                    htmlFor='menuTitle'
+                    className='mb-2 block text-sm font-medium text-newwhite'
+                  >
+                    Image Url
+                  </label>
+                  <input
+                    type='text'
+                    name='imgurl'
+                    id='imgurl'
+                    className=' block w-full rounded-lg border-2 border-secon-500 bg-bgsecon-100 p-2.5 text-newwhite placeholder-gray-500 shadow focus:border-prim-300 focus:ring-prim-300 sm:text-sm'
+                    placeholder='imageurl'
+                    value={formdata.imageurl}
+                    onChange={(e) => {
+                      setFormData({ ...formdata, imageurl: e.target.value })
                     }}
                     required
                   />

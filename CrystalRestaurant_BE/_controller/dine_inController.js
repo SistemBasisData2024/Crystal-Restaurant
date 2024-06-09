@@ -39,7 +39,22 @@ getAllSession = async(req, res) => {
     }
 }
 
+deleteSession = async(req, res) => {
+    const {session} = req.params;
+    try{
+        const result = await pool.query(
+            `DELETE FROM Dine_in WHERE session = $1 RETURNING *`,
+            [session]
+        );
+        res.status(200).json(result.rows[0]);
+    } catch(err){
+        console.error(err);
+        res.status(500).json("false");
+    }
+}
+
 module.exports = {
     createSession,
     getAllSession,
+    deleteSession,
 }
