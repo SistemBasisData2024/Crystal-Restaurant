@@ -9,6 +9,14 @@ Crystal Restaurant adalah Aplikasi pemesanan berbasis web yang akan membantu res
 Bagian backend pada crystal restaurant memiliki 4 controller utama yaitu User, Food, Batch, dan Dine_in(Session) yang masing masing akan menghandle CRUD dari request yang masuk, backend juga mengatur rute request dengan 4 rute request utama yaitu /account, /food, /batch, dan /dine yang akan men-direct request kepada controller yang tepat.
 Backend menggunakan NeonDB sebagai cloud Database, dengan Express js sebagai handlernya.
 
+### Program Version
+Node : 20
+Express : 4.19.2
+Cors : 2.8.5
+Nodemon : 8.11
+
+App Version : 1.0.0
+
 ## Frontend
 
 ### Signin Page
