@@ -21,7 +21,8 @@ export default function OrderPage() {
     createBatch(orderState, location.pathname.split("/")[1])
       .then((data) => {
         if (data.success) {
-          console.log(data)
+          // console.log(data)
+          setOrderState([])
           setOrderSuccess(true)
         } else {
           throw new Error("Failed to create batch")

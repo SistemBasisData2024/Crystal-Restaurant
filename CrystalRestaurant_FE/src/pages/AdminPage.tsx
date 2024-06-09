@@ -8,6 +8,8 @@ import QRCode from "react-qr-code"
 
 const URL = "http://localhost:5173"
 import { makeFood } from "../actions/Food.actions"
+import { useAtom } from "jotai"
+import { usernameAtom } from "../main"
 
 interface FoodItem {
   id: number
@@ -29,7 +31,8 @@ export default function AdminPage() {
   const [popupAddMenu, setPopupAddMenu] = useState(false)
   const [popupSessionName, setPopupSessionName] = useState("")
   const [sessions, setSessions] = useState<string[]>([])
-  const [isCombo, setIsCombo] = useState(false)
+  const [_1, setIsCombo] = useState(false)
+  const [username, _2] = useAtom(usernameAtom)
 
 
   const submitHandler = async (e: any) => {
@@ -129,8 +132,17 @@ export default function AdminPage() {
       })
   }
 
+  //cek admin
+  useEffect(() => {
+    if (username !== "ryansatj") {
+      alert("You are not authorized to access this page")
+      window.location.href = "/"
+    }
+  }, [username])
+  
+
   return (
-    <section className='absolute left-0 top-0 -z-10 flex h-screen w-screen flex-col items-center justify-start bg-bgdull-200 pt-32 text-newwhite'>
+    <section className='absolute left-0 top-0 z-20 flex h-screen w-screen flex-col items-center justify-start bg-bgdull-200 pt-32 text-newwhite'>
       <h1 className=' text-center text-4xl font-bold leading-tight tracking-tight text-newwhite md:text-4xl'>
         Admin Page
       </h1>
@@ -176,7 +188,7 @@ export default function AdminPage() {
       </div>
 
       {popupAddMenu && (
-        <section className='absolute left-0 top-0 flex h-screen w-screen items-center justify-center  backdrop-blur-lg '>
+        <section className='absolute left-0 top-0 flex h-screen w-screen items-center justify-center backdrop-blur-lg '>
           <div className='relative w-full rounded-2xl border-2 border-secon-500 bg-bgsecon-100 duration-300 hover:border-prim-100 hover:shadow-xl hover:shadow-prim-500 sm:max-w-md md:mt-0 xl:p-0'>
             <button
               onMouseDown={() => setPopupAddMenu(!popupAddMenu)}
@@ -313,7 +325,7 @@ export default function AdminPage() {
               <h1 className='text-center text-xl font-bold leading-tight tracking-tight text-newwhite md:text-2xl'>
                 Session link:
               </h1>
-              <p className='text-center text-lg font-normal text-newwhite underline'>
+              <p className='text-center text-lg font-normal text-newwhite underline text-wrap '>
                 <Link to={`/${popupSessionName}`}>
                   {URL}/{popupSessionName}
                 </Link>
@@ -337,7 +349,7 @@ export default function AdminPage() {
                 </button>
               </div>
               <div className='flex flex-col items-center'>
-                <h1 className='text-center text-xl font-bold leading-tight tracking-tight text-newwhite md:text-2xl'>
+                <h1 className='text-center text-xl font-bold leading-tight tracking-tight text-newwhite md:text-2xl mb-4'>
                   QR Code:
                 </h1>
                 <QRCode value={`${URL}/session/${popupSessionName}`} />
