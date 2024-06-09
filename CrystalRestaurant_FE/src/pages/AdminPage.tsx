@@ -2,7 +2,6 @@ import TableAdmin from "../components/TableAdmin"
 import { useState, useEffect } from "react"
 
 import { getAllFood } from "../actions/Food.actions"
-import { addMenu } from "../actions/Menu.action"
 import { deleteSession, dineIn, getSession } from "../actions/Dine.actions"
 import { Link } from "react-router-dom"
 import QRCode from "react-qr-code"
