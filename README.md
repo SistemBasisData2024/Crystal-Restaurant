@@ -17,7 +17,9 @@ Backend menggunakan NeonDB sebagai cloud Database, dengan Express js sebagai han
 
 App Version : 1.0.0
 
-Deployed Web Link : https://deploy-proyekakhir-fe.vercel.app/7e8f4e9183cb6c4902c839a698332eaa/menu
+Deployed Web Link : https://deploy-proyekakhir-fe.vercel.app/
+
+Deployed Backend Server : https://deploy-proyekakhir-wmuk.vercel.app/
 
 ## Frontend
 
