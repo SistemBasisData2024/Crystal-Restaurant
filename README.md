@@ -10,10 +10,10 @@ Bagian backend pada crystal restaurant memiliki 4 controller utama yaitu User, F
 Backend menggunakan NeonDB sebagai cloud Database, dengan Express js sebagai handlernya.
 
 ### Program Version
-Node : 20
-Express : 4.19.2
-Cors : 2.8.5
-Nodemon : 8.11
+- Node : 20
+- Express : 4.19.2
+- Cors : 2.8.5
+- Nodemon : 8.11
 
 App Version : 1.0.0
 
