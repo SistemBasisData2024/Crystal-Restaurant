@@ -2,7 +2,6 @@ import TableAdmin from "../components/TableAdmin"
 import { useState, useEffect } from "react"
 
 import { getAllFood } from "../actions/Food.actions"
-import { addMenu } from "../actions/Menu.action"
 import { makeFood } from "../actions/Food.actions"
 import { dineIn, getSession } from "../actions/Dine.actions"
 
