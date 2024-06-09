@@ -315,7 +315,7 @@ export default function AdminPage() {
               </h1>
               <p className='text-center text-lg font-normal text-newwhite underline'>
                 <Link to={`/${popupSessionName}`}>
-                  {URL}/session/{popupSessionName}
+                  {URL}/{popupSessionName}
                 </Link>
               </p>
               <div className='flex justify-between '>

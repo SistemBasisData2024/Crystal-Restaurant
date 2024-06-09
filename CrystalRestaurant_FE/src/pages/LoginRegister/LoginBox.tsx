@@ -1,9 +1,8 @@
-// import logo from "../assets/logo.svg"
 import { userLogin } from "../../actions/User.actions"
 import { useState } from "react"
 import { useAtom } from "jotai"
-
 import { usernameAtom } from "../../main"
+import { useNavigate } from "react-router-dom"
 
 export default function LoginBox(props: { handleLogin: any; changeToRegister: any }) {
   const [formdata, setFormData] = useState({
@@ -12,20 +11,21 @@ export default function LoginBox(props: { handleLogin: any; changeToRegister: an
   })
   const [isLoaded, setIsLoaded] = useState(false)
   const [_, setUsername] = useAtom(usernameAtom)
+  const navigate = useNavigate();
 
   const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setIsLoaded(true)
 
-    const response = userLogin(formdata)
-
-    response
+    userLogin(formdata)
       .then((res) => {
         if (res.success) {
           console.log("Login successful")
           setUsername(formdata.username)
           props.handleLogin()
-          return
+          if(res.data.isadmin){
+            navigate("/admin");
+          }
         } else {
           throw new Error("Login failed")
         }
@@ -62,8 +62,8 @@ export default function LoginBox(props: { handleLogin: any; changeToRegister: an
               </label>
               <input
                 type='text'
-                name='unsername'
-                id='unsernameLogin'
+                name='username'
+                id='usernameLogin'
                 className=' block w-full rounded-lg border-2 border-secon-500 bg-bgsecon-100 p-2.5 text-newwhite placeholder-gray-500 shadow focus:border-prim-300 focus:ring-prim-300 sm:text-sm'
                 placeholder='username'
                 value={formdata.username}
