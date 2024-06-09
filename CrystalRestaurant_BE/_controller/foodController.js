@@ -93,6 +93,20 @@ getAllCombo = async (req, res) =>{
     }
 }
 
+deleteFood = async(req, res) => {
+    const {id} = req.params;
+    try{
+        const result = await pool.query(
+            `DELETE FROM FOOD WHERE id = $1 RETURNING *`,
+            [id]
+        );
+        res.status(200).json(result.rows[0]);
+    }catch(err){
+        console.error(err);
+        res.status(500).json("false");
+    }
+}
+
 
 module.exports ={
     getAllFood,
@@ -100,4 +114,5 @@ module.exports ={
     createCombo,
     getCombo,
     getAllCombo,
+    deleteFood,
 }
