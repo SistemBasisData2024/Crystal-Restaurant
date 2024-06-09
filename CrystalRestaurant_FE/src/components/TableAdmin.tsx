@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { removeMenu } from "../actions/Menu.action"
+import { deleteFood } from "../actions/Food.actions"
 
 interface MenuItem {
   menuId: number
@@ -17,7 +18,9 @@ export default function TableAdmin(props: { menuState: any; setMenuState: any })
   }
 
   const handleRemove = (index: number) => {
-    removeMenu(props.menuState[index].menuId, props.menuState, props.setMenuState)
+    //removeMenu(props.menuState[index].menuId, props.menuState, props.setMenuState)
+    deleteFood(props.menuState[index].id);
+    window.location.reload();
   }
 
   const handleChangePrice = (index: number, price: number) => {

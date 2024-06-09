@@ -50,6 +50,7 @@ export default function AdminPage() {
       if (response.success) {
         // Handle success
         console.log("Food successfully created:", response.data);
+        window.location.reload();
       } else {
         // Handle failure
         console.error("Failed to create food:", response.success);

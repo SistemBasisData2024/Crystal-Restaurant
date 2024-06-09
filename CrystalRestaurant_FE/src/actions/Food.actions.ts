@@ -1,4 +1,5 @@
 import axios from "axios"
+import { IntegerType } from "mongodb"
 
 //formData = req.body
 
@@ -48,6 +49,20 @@ export const makeFood = async (formData: any) => {
     const response = await axios.post(
       `${import.meta.env.VITE_API_URL}/food/makeFood`,
       formData
+    )
+    console.log("RESPONSE FROM BACKEND")
+    console.log(response.data)
+    return baseApiResponse(response.data, true)
+  } catch (error: any) {
+    console.error(error)
+    return baseApiResponse(null, false)
+  }
+}
+
+export const deleteFood = async (id : IntegerType) => {
+  try {
+    const response = await axios.delete(
+      `${import.meta.env.VITE_API_URL}/food/deleteFood/${id}`,
     )
     console.log("RESPONSE FROM BACKEND")
     console.log(response.data)
