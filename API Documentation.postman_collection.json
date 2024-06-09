@@ -1,0 +1,1568 @@
+{
+	"info": {
+		"_postman_id": "c878a16b-0eb4-469e-855e-ce46dd8016f3",
+		"name": "API Documentation",
+		"description": "Berikut adalah dokumentasi dari API yang digunakan dalam proyek kami.\n\n| Path/Endpoints | Description |\n| --- | --- |\n| `/batch/addBatch`  <br>`/batch/getPrice/:session` | API untuk mengakses resource dimana batch batch dari setiap session terdiri dari order yang dilakukan pada setiap batch |\n| `/dine/create`  <br>`/dine/getall`  <br>`/dine/delete/:session` | API untuk menggunakan fitur session |\n| `/food/getAll`  <br>`/food/makeFood`  <br>`/food/makeCombo/:id`  <br>`/food/getCombo/:id`  <br>`/food/getAllCombo` | API untuk mengakses resource dari menu yang terdiri dari makanan dan combo |\n| `/user/login`  <br>`/user/signup`  <br>`/user/update/:id` | API untuk mengakses resource dari users dan operasi autentikasi seperti login |\n\n### Request Body\n\nAPI kami menggunakan request body `xxx-www-form-urlencoded` dimana isi body yaitu berupa key dan valuenya tidak terlihat pada url. Pengecualian pada endpoint `/batch/addBatch`karena menerima request dari format frontend, maka menggunakan raw dalam berntuk JSON.\n\n### **Cara menggunakan?**\n\n`Collection` ini terdiri dari beberapa folder. Setiap folder berisi contoh request API untuk masing - masing endpoint. Gunakan`Sample Request` sebagai referensi untuk format pengisian request.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "31051453"
+	},
+	"item": [
+		{
+			"name": "Batch",
+			"item": [
+				{
+					"name": "addBatch",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"batch\": [\r\n        {\r\n            \"session\": \"d514b7e582efb835aa043a141d97f320\",\r\n            \"orderid\": 1,\r\n            \"type\": \"food\",\r\n            \"qty\": 3\r\n        },\r\n        {\r\n            \"session\": \"d514b7e582efb835aa043a141d97f320\",\r\n            \"orderid\": 2,\r\n            \"type\": \"combo\",\r\n            \"qty\": 1\r\n        }\r\n    ]\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4005/batch/addBatch",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4005",
+							"path": [
+								"batch",
+								"addBatch"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Sample Request",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"batch\": [\r\n        {\r\n            \"session\": \"d514b7e582efb835aa043a141d97f320\",\r\n            \"orderid\": 1,\r\n            \"type\": \"food\",\r\n            \"qty\": 3\r\n        },\r\n        {\r\n            \"session\": \"d514b7e582efb835aa043a141d97f320\",\r\n            \"orderid\": 2,\r\n            \"type\": \"combo\",\r\n            \"qty\": 1\r\n        }\r\n    ]\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:4005/batch/addBatch",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "4005",
+									"path": [
+										"batch",
+										"addBatch"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "214"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"d6-0NWT+9+8+1jQsDgqMGkJWeoOsH8\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 09 Jun 2024 11:01:42 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"id\": 28,\n        \"session\": \"d514b7e582efb835aa043a141d97f320\",\n        \"orderid\": \"1\",\n        \"type\": \"food\",\n        \"isdone\": false,\n        \"qty\": 3\n    },\n    {\n        \"id\": 29,\n        \"session\": \"d514b7e582efb835aa043a141d97f320\",\n        \"orderid\": \"2\",\n        \"type\": \"combo\",\n        \"isdone\": false,\n        \"qty\": 1\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "getTotalPrice",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:4005/batch/getPrice/d514b7e582efb835aa043a141d97f320",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4005",
+							"path": [
+								"batch",
+								"getPrice",
+								"d514b7e582efb835aa043a141d97f320"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Sample Request",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:4005/batch/getPrice/d514b7e582efb835aa043a141d97f320",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "4005",
+									"path": [
+										"batch",
+										"getPrice",
+										"d514b7e582efb835aa043a141d97f320"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "152"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"98-FxOreeCYtzWZFxgIUKA9RUDKTHY\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 09 Jun 2024 11:03:04 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"total\": 445000,\n    \"orders\": [\n        {\n            \"foodName\": \"Salmon Sashimi\",\n            \"foodPrice\": 100000,\n            \"quantity\": 3\n        },\n        {\n            \"foodName\": \"Sashimi Combo 1\",\n            \"foodPrice\": 145000,\n            \"quantity\": 1\n        }\n    ]\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Dine In",
+			"item": [
+				{
+					"name": "getAllSessions",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:4005/dine/getall",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4005",
+							"path": [
+								"dine",
+								"getall"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Sample Request",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:4005/dine/getall",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "4005",
+									"path": [
+										"dine",
+										"getall"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "48"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"30-izfclnQR2fYpu8NSjWjgBq4eBT4\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 09 Jun 2024 09:28:12 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"session\": \"8ddcaebfe6c9e7506e602264d5b9c786\"\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "createSession",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:4005/dine/create",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4005",
+							"path": [
+								"dine",
+								"create"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Sample Request",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:4005/dine/create",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "4005",
+									"path": [
+										"dine",
+										"create"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "170"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"aa-2DTnLKZoGEIUPmSU6xhmGD3uOk4\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 09 Jun 2024 09:29:36 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 24,\n    \"qr_code\": \"http://localhost:5173/2dd169b0fff3d62bc0c33ae8ecdf92e9\",\n    \"dine_time\": \"2024-06-08T17:00:00.000Z\",\n    \"isexp\": 0,\n    \"session\": \"2dd169b0fff3d62bc0c33ae8ecdf92e9\"\n}"
+						}
+					]
+				},
+				{
+					"name": "deleteSession",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:4005/dine/delete/2dd169b0fff3d62bc0c33ae8ecdf92e9",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4005",
+							"path": [
+								"dine",
+								"delete",
+								"2dd169b0fff3d62bc0c33ae8ecdf92e9"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Sample Request",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:4005/dine/delete/2dd169b0fff3d62bc0c33ae8ecdf92e9",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "4005",
+									"path": [
+										"dine",
+										"delete",
+										"2dd169b0fff3d62bc0c33ae8ecdf92e9"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "170"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"aa-m0hGDZLRM+XcQPbpxzJnkCKAWLI\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 09 Jun 2024 09:30:55 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 24,\n    \"qr_code\": \"http://localhost:5173/2dd169b0fff3d62bc0c33ae8ecdf92e9\",\n    \"dine_time\": \"2024-06-08T17:00:00.000Z\",\n    \"isexp\": 2,\n    \"session\": \"2dd169b0fff3d62bc0c33ae8ecdf92e9\"\n}"
+						}
+					]
+				}
+			],
+			"description": "The `/collections` endpoints let you manage your [collections](https://learning.postman.com/docs/sending-requests/intro-to-collections/)."
+		},
+		{
+			"name": "Food",
+			"item": [
+				{
+					"name": "getAll",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:4005/food/getAll",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4005",
+							"path": [
+								"food",
+								"getAll"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Sample Request",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:4005/food/getAll",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "4005",
+									"path": [
+										"food",
+										"getAll"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1887"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"75f-WiThE4+A2IWhxUNTSQ+ztKeYb9s\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 09 Jun 2024 08:36:18 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"id\": 1,\n        \"name\": \"Salmon Sashimi\",\n        \"description\": \"Sashimi (刺身) is thinly sliced, raw food. It is one of the most famous dishes in the Japanese cuisine. Seafood is most commonly eaten as sashimi, but other meats (such as beef, horse and deer) and foods (such as yuba tofu skin and konnyaku) can also be served as sashimi. Some people confuse sashimi with sushi\",\n        \"price\": 100000,\n        \"imageurl\": \"https://www.manusmenu.com/wp-content/uploads/2016/05/1-Salmon-Sashimi-with-Ponzu-3-1-of-1.jpg\"\n    },\n    {\n        \"id\": 2,\n        \"name\": \"Salmon Roll\",\n        \"description\": \"A sushi roll is a food of Asian origin that features rice and seafood wrapped in seaweed (nori). Until the end of the twentieth century, sushi rolls were only available in restaurants. Today, a number of companies prepare them for retail sale in grocery stores.\",\n        \"price\": 70000,\n        \"imageurl\": \"https://www.allrecipes.com/thmb/XT7-9MROYJZvNyQR4J40HGOVDmQ=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/19511smoked-salmon-sushi-rollfabeveryday4x3-159a22b4d3ac49fe9a146db94b53c930.jpg\"\n    },\n    {\n        \"id\": 3,\n        \"name\": \"Tuna Sashimi\",\n        \"description\": \"While most people call eating raw fish “sushi,” raw fish is technically only called sushi when served with vinegared rice. Sashimi, on the other hand, simply refers to thinly-sliced raw food, typically seafood. Preparing your fresh fish this way really allows you to savor the flavor\",\n        \"price\": 75000,\n        \"imageurl\": \"https://ocwildseafood.com/cdn/shop/articles/Ahi_Tuna_Sashimi_Seafood_Recipe_1024x.jpg?v=1591853624\"\n    },\n    {\n        \"id\": 6,\n        \"name\": \"Salmon Roe\",\n        \"description\": \"Ikura is salmon roe. These soft eggs are larger than tobiko and masago. In fact, they're beautiful, bubbly orange spheres. Ikura is commonly used to garnish sushi rolls or wrapped in crisp nori seaweed on top of sushi rice.\",\n        \"price\": 120000,\n        \"imageurl\": \"https://www.sushi-pedia.com/static/59cc5443d7eaaf02d61bff50a2597469/91adb/ikura-salmon-roe-sushi-opener.jpg\"\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "makeFood",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "Unagi",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "Freshwater Eel.  Takes time to prepare; Eel is Filet, then grilled, then steamed then grilled again with a continuous basting of Unagi Sauce(parts of eel, soy sauce, sugar, and sake). Uangi is known to have an abundant amount of health benefits.",
+									"type": "text"
+								},
+								{
+									"key": "price",
+									"value": "85000",
+									"type": "text"
+								},
+								{
+									"key": "imageurl",
+									"value": "https://takestwoeggs.com/wp-content/uploads/2023/08/Unagi-Sushi-eel-sushi-takestwoeggs-sq.jpg",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:4005/food/makeFood",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4005",
+							"path": [
+								"food",
+								"makeFood"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Sample Request",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "name",
+											"value": "Unagi",
+											"type": "text"
+										},
+										{
+											"key": "description",
+											"value": "Freshwater Eel.  Takes time to prepare; Eel is Filet, then grilled, then steamed then grilled again with a continuous basting of Unagi Sauce(parts of eel, soy sauce, sugar, and sake). Uangi is known to have an abundant amount of health benefits.",
+											"type": "text"
+										},
+										{
+											"key": "price",
+											"value": "85000",
+											"type": "text"
+										},
+										{
+											"key": "imageurl",
+											"value": "https://takestwoeggs.com/wp-content/uploads/2023/08/Unagi-Sushi-eel-sushi-takestwoeggs-sq.jpg",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:4005/food/makeFood",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "4005",
+									"path": [
+										"food",
+										"makeFood"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "406"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"196-s1GZHqlMFtqsV6NH5eVR3QqclaM\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 09 Jun 2024 08:43:48 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 7,\n    \"name\": \"Unagi\",\n    \"description\": \"Freshwater Eel.  Takes time to prepare; Eel is Filet, then grilled, then steamed then grilled again with a continuous basting of Unagi Sauce(parts of eel, soy sauce, sugar, and sake). Uangi is known to have an abundant amount of health benefits.\",\n    \"price\": 85000,\n    \"imageurl\": \"https://takestwoeggs.com/wp-content/uploads/2023/08/Unagi-Sushi-eel-sushi-takestwoeggs-sq.jpg\"\n}"
+						}
+					]
+				},
+				{
+					"name": "deleteFood",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": [
+						{
+							"name": "Sample Request",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:4005/food/deleteFood/9",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "4005",
+									"path": [
+										"food",
+										"deleteFood",
+										"9"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "406"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"196-ai1melR36CfBXd3uzcRBS817w40\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 09 Jun 2024 11:29:20 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 9,\n    \"name\": \"Unagi\",\n    \"description\": \"Freshwater Eel.  Takes time to prepare; Eel is Filet, then grilled, then steamed then grilled again with a continuous basting of Unagi Sauce(parts of eel, soy sauce, sugar, and sake). Uangi is known to have an abundant amount of health benefits.\",\n    \"price\": 85000,\n    \"imageurl\": \"https://takestwoeggs.com/wp-content/uploads/2023/08/Unagi-Sushi-eel-sushi-takestwoeggs-sq.jpg\"\n}"
+						}
+					]
+				},
+				{
+					"name": "getAllCombo",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:4005/food/getAllCombo",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4005",
+							"path": [
+								"food",
+								"getAllCombo"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Sample Request",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:4005/food/getAllCombo",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "4005",
+									"path": [
+										"food",
+										"getAllCombo"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "267"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"10b-MUXD+WOxqDLCnOa51T6l4QgzHBs\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 09 Jun 2024 08:46:33 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"combo_id\": 1,\n        \"combo_name\": \"Salmon Combo 1\",\n        \"combo_description\": \"A mix of Salmon Sashimi and Salmon Roll\",\n        \"combo_price\": 150000,\n        \"combo_image_url\": \"https://byfood.b-cdn.net/api/public/assets/9599/content?optimizer=image\",\n        \"food_names\": [\n            \"Salmon Sashimi\",\n            \"Salmon Roll\"\n        ]\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "getCombo",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:4005/food/getCombo/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4005",
+							"path": [
+								"food",
+								"getCombo",
+								"1"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Sample Request",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:4005/food/getCombo/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "4005",
+									"path": [
+										"food",
+										"getCombo",
+										"1"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1073"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"431-iyaDCxhZfK+IpbuRLEP9G2Cksqc\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 09 Jun 2024 08:53:48 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"food_id\": 1,\n        \"food_name\": \"Salmon Sashimi\",\n        \"food_description\": \"Sashimi (刺身) is thinly sliced, raw food. It is one of the most famous dishes in the Japanese cuisine. Seafood is most commonly eaten as sashimi, but other meats (such as beef, horse and deer) and foods (such as yuba tofu skin and konnyaku) can also be served as sashimi. Some people confuse sashimi with sushi\",\n        \"food_price\": 100000,\n        \"food_image_url\": \"https://www.manusmenu.com/wp-content/uploads/2016/05/1-Salmon-Sashimi-with-Ponzu-3-1-of-1.jpg\"\n    },\n    {\n        \"food_id\": 2,\n        \"food_name\": \"Salmon Roll\",\n        \"food_description\": \"A sushi roll is a food of Asian origin that features rice and seafood wrapped in seaweed (nori). Until the end of the twentieth century, sushi rolls were only available in restaurants. Today, a number of companies prepare them for retail sale in grocery stores.\",\n        \"food_price\": 70000,\n        \"food_image_url\": \"https://www.allrecipes.com/thmb/XT7-9MROYJZvNyQR4J40HGOVDmQ=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/19511smoked-salmon-sushi-rollfabeveryday4x3-159a22b4d3ac49fe9a146db94b53c930.jpg\"\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "makeCombo",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "food_id",
+									"value": "3",
+									"type": "text"
+								},
+								{
+									"key": "name",
+									"value": "Sashimi Combo 1",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "Served with a side of tangy pickled ginger, spicy wasabi, and soy sauce, this combo is a harmonious blend of the ocean's best offerings. Perfect for sashimi enthusiasts and those looking to explore the pure, unadulterated flavors of fresh seafood.",
+									"type": "text"
+								},
+								{
+									"key": "price",
+									"value": "145000",
+									"type": "text"
+								},
+								{
+									"key": "imageurl",
+									"value": "https://genjiweb.com/wp-content/uploads/sites/12/2021/05/tuna-salmon-sashimi-combo.jpg",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:4005/food/makeCombo/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4005",
+							"path": [
+								"food",
+								"makeCombo",
+								"2"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Sample Request(1)",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "food_id",
+											"value": "1",
+											"type": "text"
+										},
+										{
+											"key": "name",
+											"value": "Sashimi Combo 1",
+											"type": "text"
+										},
+										{
+											"key": "description",
+											"value": "Served with a side of tangy pickled ginger, spicy wasabi, and soy sauce, this combo is a harmonious blend of the ocean's best offerings. Perfect for sashimi enthusiasts and those looking to explore the pure, unadulterated flavors of fresh seafood.",
+											"type": "text"
+										},
+										{
+											"key": "price",
+											"value": "145000",
+											"type": "text"
+										},
+										{
+											"key": "imageurl",
+											"value": "https://genjiweb.com/wp-content/uploads/sites/12/2021/05/tuna-salmon-sashimi-combo.jpg",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:4005/food/makeCombo/2",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "4005",
+									"path": [
+										"food",
+										"makeCombo",
+										"2"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "424"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1a8-ewhNvoF0On2W6nWVcgrDIyNVzPA\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 09 Jun 2024 09:06:59 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 2,\n    \"food_id\": 1,\n    \"name\": \"Sashimi Combo 1\",\n    \"description\": \"Served with a side of tangy pickled ginger, spicy wasabi, and soy sauce, this combo is a harmonious blend of the ocean's best offerings. Perfect for sashimi enthusiasts and those looking to explore the pure, unadulterated flavors of fresh seafood.\",\n    \"price\": 145000,\n    \"imageurl\": \"https://genjiweb.com/wp-content/uploads/sites/12/2021/05/tuna-salmon-sashimi-combo.jpg\"\n}"
+						},
+						{
+							"name": "Sample Request(2)",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "food_id",
+											"value": "3",
+											"type": "text"
+										},
+										{
+											"key": "name",
+											"value": "Sashimi Combo 1",
+											"type": "text"
+										},
+										{
+											"key": "description",
+											"value": "Served with a side of tangy pickled ginger, spicy wasabi, and soy sauce, this combo is a harmonious blend of the ocean's best offerings. Perfect for sashimi enthusiasts and those looking to explore the pure, unadulterated flavors of fresh seafood.",
+											"type": "text"
+										},
+										{
+											"key": "price",
+											"value": "145000",
+											"type": "text"
+										},
+										{
+											"key": "imageurl",
+											"value": "https://genjiweb.com/wp-content/uploads/sites/12/2021/05/tuna-salmon-sashimi-combo.jpg",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:4005/food/makeCombo/2",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "4005",
+									"path": [
+										"food",
+										"makeCombo",
+										"2"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "424"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1a8-SkT9UL8UFbHGGAvJW0VmSTQBPdM\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 09 Jun 2024 09:08:09 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 2,\n    \"food_id\": 3,\n    \"name\": \"Sashimi Combo 1\",\n    \"description\": \"Served with a side of tangy pickled ginger, spicy wasabi, and soy sauce, this combo is a harmonious blend of the ocean's best offerings. Perfect for sashimi enthusiasts and those looking to explore the pure, unadulterated flavors of fresh seafood.\",\n    \"price\": 145000,\n    \"imageurl\": \"https://genjiweb.com/wp-content/uploads/sites/12/2021/05/tuna-salmon-sashimi-combo.jpg\"\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "signUp",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "John",
+									"type": "text"
+								},
+								{
+									"key": "username",
+									"value": "johndoe",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "john@example.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "s3crE7p@$$worD",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:4005/user/signUp",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4005",
+							"path": [
+								"user",
+								"signUp"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Sample Request",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "name",
+											"value": "John",
+											"type": "text"
+										},
+										{
+											"key": "username",
+											"value": "johndoe",
+											"type": "text"
+										},
+										{
+											"key": "email",
+											"value": "john@example.com",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "s3crE7p@$$worD",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:4005/user/signUp",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "4005",
+									"path": [
+										"user",
+										"signUp"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "141"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"8d-kgwkjIiDRL4L5FGvgeap7omsXwo\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 09 Jun 2024 09:16:05 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 2,\n    \"name\": \"John\",\n    \"username\": \"johndoe\",\n    \"email\": \"john@example.com\",\n    \"password\": \"a95fd5fee6185c9580ec7c9150c90ff2\",\n    \"poin\": 0,\n    \"isadmin\": false\n}"
+						}
+					]
+				},
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "username",
+									"value": "johndoe",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "s3crE7p@$$worD",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:4005/user/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4005",
+							"path": [
+								"user",
+								"login"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Sample Request",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "username",
+											"value": "johndoe",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "s3crE7p@$$worD",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:4005/user/login",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "4005",
+									"path": [
+										"user",
+										"login"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "141"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"8d-kgwkjIiDRL4L5FGvgeap7omsXwo\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 09 Jun 2024 09:21:34 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 2,\n    \"name\": \"John\",\n    \"username\": \"johndoe\",\n    \"email\": \"john@example.com\",\n    \"password\": \"a95fd5fee6185c9580ec7c9150c90ff2\",\n    \"poin\": 0,\n    \"isadmin\": false\n}"
+						},
+						{
+							"name": "Failed Request",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "username",
+											"value": "johndoe",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "s3crE7p@$$word",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:4005/user/login",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "4005",
+									"path": [
+										"user",
+										"login"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "16"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"10-FP8DimRMsqRn/7tBJghA2w7DIto\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 09 Jun 2024 11:11:36 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "\"user not found\""
+						}
+					]
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "John Double",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:4005/user/update/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4005",
+							"path": [
+								"user",
+								"update",
+								"2"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Sample Request",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "name",
+											"value": "John Double",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:4005/user/update/2",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "4005",
+									"path": [
+										"user",
+										"update",
+										"2"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "148"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"94-Ezv8mB79Nve8Q0neER7Fh7J0S4g\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 09 Jun 2024 09:24:13 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 2,\n    \"name\": \"John Double\",\n    \"username\": \"johndoe\",\n    \"email\": \"john@example.com\",\n    \"password\": \"a95fd5fee6185c9580ec7c9150c90ff2\",\n    \"poin\": 0,\n    \"isadmin\": false\n}"
+						}
+					]
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "apikey",
+		"apikey": [
+			{
+				"key": "key",
+				"value": "X-API-Key",
+				"type": "string"
+			},
+			{
+				"key": "value",
+				"value": "{{token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "https://farming-simulator.pstmn.io"
+		}
+	]
+}
